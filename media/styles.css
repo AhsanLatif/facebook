@@ -428,3 +428,13 @@ height:100px;
 width:200px;
 height:200px;
 }
+#searchProfileHead
+{
+position:relative;
+right:70%;
+top:30px;
+}
+#searchProfileHead input
+{
+height:30px;
+}
