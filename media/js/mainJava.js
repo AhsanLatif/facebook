@@ -95,8 +95,32 @@ $('.profileInfoTextWrapper').css('text-decoration','none');
 }
 
 ); 
+
+$('#pro').mouseover(
+function()
+{
+
+$('#pictureControl').css('display','block');
+}
+
+
+).mouseout(
+
+function()
+{
+$('#pictureControl').css('display','none');
+
+}
+
+);
+
+ $('#profileInfoTextWrapper').tooltip({
+    title: 'Click to edit!',
+	placement: 'bottom'
+  });
  
 });
+
 
 
 //Reference: w3schools.com
