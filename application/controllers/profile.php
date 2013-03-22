@@ -9,6 +9,12 @@ class profile extends CI_Controller {
 		 $this->load->library('session');
 
     }
+		public function Search()
+	{
+	 $query=$_POST['SearchBox'];
+	 $resource=$this->main_model->search($query,'firstname');
+
+	}
 
 	public function cropPicture()
 	{
