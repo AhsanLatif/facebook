@@ -122,6 +122,7 @@ $employer="n/a";
 <div class="personDetailProfile fTop">
 <div id="pro">
 <div id="pictureControl"><a  data-toggle="modal" href="#pictureChange" class="btn btn-primary">Edit Profile Picture</a></div>
+<div id="pictureControl"><a  data-toggle="modal" href=<?php echo "" . $base . "/index.php/profile/addFriend?id=" . $id . ""?> class="btn btn-primary">Add Friend</a></div>
 <img class="thumbnail fLeft" id="propic" src=<?php echo "" . $base . "/" . $uploads . "/" . $image_path . ""; ?> /></div>
 
 
