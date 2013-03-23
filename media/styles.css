@@ -438,3 +438,17 @@ top:30px;
 {
 height:30px;
 }
+
+#pictureChanger
+{
+display:none;
+position:relative;
+/*right:10px;*/
+top:210px;
+}
+#logOut
+{
+position:relative;
+right:-70px;
+top:-40px;
+}

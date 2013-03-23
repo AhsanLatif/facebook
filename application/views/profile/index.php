@@ -4,6 +4,29 @@
 </div>
 <div class="profileWrapper fTop mainBlueColor">
 
+<div id="changeInfo"class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Edit Your Info</h3>
+  </div>
+  <div class="modal-body">
+  <form id="editInfo" action=<?php  echo "".$base."/index.php/profile/updateInfo"?> method="post">
+    <label>School </label><input type="text" name="school" id="school" value=<?php echo $school ?> />
+	<label>University </label><input type="text" name="university" id="university" value=<?php echo $university ?> />
+	<label>Employer </label><input type="text" name="employer" id="employer" value=<?php echo $employer ?> />
+	<input type="hidden" name="id" value=<?php echo $id ?> />
+	<label>Birthday </label><input type="text" name="bdate" id="datepicker" value=<?php echo $bday ?> />
+	
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <input type="submit" class="btn btn-primary"/>
+	</form>
+  </div>
+</div>
+
+
+
 
 <div id="pictureChange" class="modal hide fade in" style="display: none; ">
 <div class="modal-header">
@@ -73,9 +96,10 @@
 
 <div class="personDetailProfile fTop">
 
-
-<img class="thumbnail fLeft" id="propic" src=<?php echo "" . $base . "/" . $uploads . "/" . $image_path . ""; ?> />
-<span class="profileInfo well pull-left"><?php echo "<span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>".$name."</h3>Birthday:".$bday."<br> School:".$school."<br>University".$university."<br>Employer:".$employer."</p></span>" ?>
+<div id="pro">
+<button type="button" id="pictureChanger" data-toggle="modal" data-target="#pictureChange">Edit</button>
+<img class="thumbnail fLeft" id="propic" src=<?php echo "" . $base . "/" . $uploads . "/" . $image_path . ""; ?>> </div>
+<span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>".$name."</h3>Birthday:".$bday."<br> School:".$school."<br>University".$university."<br>Employer:".$employer."</p></span></a>" ?>
 
 <div class="profileOptions fRight">
 <img class="fLeft" src=<?php echo "" . $base . "/" . $images . "/friends-icon.jpg"; ?> />
@@ -90,10 +114,13 @@
 <div class="wall fTop">
 <h1> Post Something! </h1>
 <hr>
-<form id="Wall" name="wall">
+<form id="Wall" name="Wall">
 <input type="text" id="wallPost" name="wallPost"/></br>
 <input type="submit" class="btn" value="Post" />
 </form>
+
+<div class="nothing">
+</div>
 </div>
 
 

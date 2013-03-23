@@ -15,7 +15,19 @@ class profile extends CI_Controller {
 	 $resource=$this->main_model->search($query,'firstname');
 
 	}
-
+public function updateInfo()
+	{
+		$school=$_POST['school'];
+		$university=$_POST['university'];
+		$employer=$_POST['employer'];
+		$bdate=date('Y-m-d H:i:s', strtotime($_POST['bdate']));
+		$id=$_POST['id'];
+		$data=array('user_id'=>$id,'school'=>$school, 'university'=>$university, 'employer'=>$employer);
+		$this->main_model->insert_sign_up2($data);
+		$blekh=$this->main_model->updateInfo($data);
+		$this->main_model->updateBirthday(array('id'=>$id,'birthday'=>$bdate));
+		$this->index();
+	}
 	public function cropPicture()
 	{
 		$img = $this->session->userdata('img');

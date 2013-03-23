@@ -160,6 +160,20 @@ $this->db->join('user_info', 'user_info.user_id = user_sign_up.id','left');
         $rows = $query->num_rows();
         return $rows;
     }
+		public function updateInfo($data)
+	{
+	 $this->db->where('user_id', $data['user_id']);
+           if( $this->db->update('user_info', $data))
+		   return 1;
+		   return -1;
+	}
+	public function updateBirthday($data)
+	{
+	 $this->db->where('id', $data['id']);
+           if( $this->db->update('user_sign_up', array('birthday'=>$data['birthday'])))
+		   return 1;
+		   return -1;
+	}
 }
 
 ?>

@@ -96,11 +96,13 @@ $('.profileInfoTextWrapper').css('text-decoration','none');
 
 ); 
 
+
 $('#pro').mouseover(
 function()
 {
 
-$('#pictureControl').css('display','block');
+$('#pictureChanger').css('display','block');
+$('#pictureChanger').css('z-index','2');
 }
 
 
@@ -108,7 +110,8 @@ $('#pictureControl').css('display','block');
 
 function()
 {
-$('#pictureControl').css('display','none');
+$('#pictureChanger').css('display','none');
+$('#pictureChanger').css('z-index','1');
 
 }
 
