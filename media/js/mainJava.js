@@ -95,6 +95,32 @@ $('.profileInfoTextWrapper').css('text-decoration','none');
 }
 
 ); 
+
+$('#pro').mouseover(
+function()
+{
+
+$('#pictureChanger').css('display','block');
+$('#pictureChanger').css('z-index','2');
+}
+
+
+).mouseout(
+
+function()
+{
+$('#pictureChanger').css('display','none');
+$('#pictureChanger').css('z-index','1');
+
+}
+
+);
+
+ $('#profileInfoTextWrapper').tooltip({
+    title: 'Click to edit!',
+	placement: 'bottom'
+  });
+ 
  
 });
 

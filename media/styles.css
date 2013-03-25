@@ -289,7 +289,14 @@ height:135px;
 width:100%;
 background-color:white;
 }
-
+#pictureControl
+{
+position:relative;
+left:10px;
+top:200px;
+z-index:2;
+display:none;
+}
 #coverPhoto
 {
 position:relative;
@@ -428,3 +435,73 @@ height:100px;
 width:200px;
 height:200px;
 }
+#searchProfileHead
+{
+position:relative;
+right:70%;
+top:30px;
+}
+#searchProfileHead input
+{
+height:30px;
+}
+#pictureChanger
+{
+display:none;
+position:relative;
+/*right:10px;*/
+top:210px;
+}
+#logOut
+{
+position:relative;
+right:-70px;
+top:-40px;
+}
+
+#notifications
+{
+
+top:32px;
+right:400%;
+}
+#notifications button
+{
+color:white;
+background-color:gray;
+border-width:1px;
+border-color:white;
+border-style:solid;
+width:10px;
+}
+
+
+/*Gallery reference : http://www.w3schools.com/css/css_image_gallery.asp */
+
+.GalleryImage
+  {
+  margin:2px;
+  border:1px solid #0000ff;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  }
+.GalleryImage img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  }
+.GalleryImage a:hover img
+  {
+  border:1px solid #0000ff;
+  }
+.GalleryCaption
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+  
