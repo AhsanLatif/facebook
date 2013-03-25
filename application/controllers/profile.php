@@ -89,6 +89,12 @@ class profile extends CI_Controller {
         $img = array('img' => $imgage_path);
         $this->session->set_userdata($img);
 
+        $friends = $this->main_model->viewFriends($id);
+        $data['friends'] = $friends;
+
+        $requests = $this->main_model->viewRequests($id);
+        $data['requests'] = $requests;
+
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/index', $data);
@@ -100,37 +106,53 @@ class profile extends CI_Controller {
         redirect('/home/index');
     }
 
-    public function addFriend() {
+    public function viewProfile() {
         $id = $_GET['id'];
-        echo $id;
-    }
 
-    public function viewProfile($id) {
         $data = $this->main_model->load_media();
         $data['title'] = 'Profile Page';
-        $username = $this->session->userdata('currMail');
-        if (!$username) {
-            redirect('/home/index', 'refresh');
-        }
-        $details = $this->main_model->getUserDetails($username);
+
+        $details = $this->main_model->getUserDetailsById($id);
         $data['name'] = $details['first_name'] . " " . $details['last_name'];
         $data['bday'] = $details['birthday'];
         $data['school'] = $details['school'];
         $data['university'] = $details['university'];
         $data['employer'] = $details['employer'];
 
-        $id = $this->main_model->get_id($username);
+        //  $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
 
-        $data['id'] = $id;
+        $data['fid'] = $id;
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
-        $this->session->set_userdata($img);
+
+        echo $id;
+        $friends = $this->main_model->viewFriends($id);
+        $data['friends'] = $friends;
 
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
-        $this->load->view('profile/index', $data);
+        $this->load->view('profile/viewProfile', $data);
         $this->load->view('footer', $data);
+    }
+
+    public function displayPeople() {
+        $details = $this->main_model->displayPeople_model();
+        $data = $this->main_model->load_media();
+        $data['details'] = $details;
+//        foreach ($details as $detail){
+//            echo $detail['first_name'];
+//        } 
+//        exit();        
+        $this->load->view('header', $data);
+        $this->load->view('profile/view_people', $data);
+//        $this->load->view('profile/index', $data);
+        $this->load->view('footer', $data);
+    }
+
+    public function friends($username) {
+        $data = $this->main_model->load_media();
+        redirect('/profile/index', 'refresh');
     }
 
 }
