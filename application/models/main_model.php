@@ -108,15 +108,12 @@ class Main_model extends CI_Model {
         else
             return 0;
     }
-    
+
     public function getUserDetailsById($id) {
-        /* $this->db->select('*');
-          $this->db->from('user_sign_up');
-          $this->db->where('email_id',$username); */
 
         $this->db->select('*');
         $this->db->from('user_sign_up');
-        $this->db->where('id', $id);
+        $this->db->where('user_sign_up.id', $id);
         $this->db->join('user_info', 'user_info.user_id = user_sign_up.id', 'left');
         $query = $this->db->get();
 
@@ -141,7 +138,7 @@ class Main_model extends CI_Model {
         }
     }
 
-/*
+    /*
       public function updateImage($newName)
       {
       $result = $this->db->get_where('user_sign_up', array('activation' => $email));
@@ -171,6 +168,86 @@ class Main_model extends CI_Model {
         $query = $this->db->get('user_sign_up');
         $rows = $query->num_rows();
         return $rows;
+    }
+
+    public function displayPeople_model() {
+        $this->db->select('*');
+        $this->db->from('user_sign_up');
+        $query = $this->db->get();
+
+//        if ($query->num_rows > 0) {
+        $row = $query->result_array();
+        return $row;
+//        }
+//        else
+//            return 0;
+    }
+
+    public function addFriend($id, $fid) {
+        $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $id));
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $friend_first_name = $row->first_name;
+            $friend_last_name = $row->last_name;
+        }
+        $data = Array(
+            'user_id' => $id,
+            'friend_id' => $fid,
+            'friend_first_name' => $friend_first_name,
+            'friend_last_name' => $friend_last_name
+        );
+        $this->db->insert('user_friends_request', $data);
+    }
+
+    public function viewFriends($id) {
+        $this->db->select('*');
+        $this->db->from('user_friends');
+        $this->db->where('user_id', $id);
+        $query = $this->db->get();
+
+        $row = $query->result_array();
+        return $row;
+    }
+
+    public function viewRequests($id) {
+        $this->db->select('*');
+        $this->db->from('user_friends_request');
+        $this->db->where('user_id', $id);
+        $query = $this->db->get();
+
+        $row = $query->result_array();
+        return $row;
+    }
+
+    public function ignoreRequest($id, $fid) {
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $fid));
+        $this->db->delete('user_friends_request', array('id' => $row->id));
+    }
+
+    public function deleteFriend($id, $fid) {
+        $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $id, 'friend_id' => $fid));
+        $this->db->delete('user_friends_request', array('id' => $row->id));
+    }
+
+    public function acceptRequest($id, $fid) {
+        $query = $this->db->select('id, friend_first_name, friend_last_name')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $fid));
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $friend_first_name = $row->friend_first_name;
+            $friend_last_name = $row->friend_last_name;
+        }
+
+
+        $data = Array(
+            'user_id' => $id,
+            'friend_id' => $fid,
+            'friend_first_name' => $friend_first_name,
+            'friend_last_name' => $friend_last_name
+        );
+        $this->db->insert('user_friends', $data);
+        $this->db->delete('user_friends_request', array('id' => $row->id));
     }
 
 }
