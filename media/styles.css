@@ -435,6 +435,11 @@ height:100px;
 width:200px;
 height:200px;
 }
+#frndpropic
+{
+width:200px;
+height:200px;
+}
 #searchProfileHead
 {
 position:relative;
@@ -467,12 +472,22 @@ right:400%;
 }
 #notifications button
 {
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+border-radius:5px;
+padding: 2 2 2 2;
 color:white;
 background-color:gray;
 border-width:1px;
 border-color:white;
 border-style:solid;
-width:10px;
+width:15px;
+}
+
+#searchPageGallery
+{
+width:100%;
+
 }
 
 
@@ -480,15 +495,20 @@ width:10px;
 
 .GalleryImage
   {
-  margin:2px;
+ 
   border:1px solid #0000ff;
-  height:auto;
-  width:auto;
+  height:100;
+  width:100;
   float:left;
-  text-align:center;
+  margin-right:10px;
+  margin-top:30px;
+
   }
 .GalleryImage img
   {
+ padding-left:0;
+  height:100%;
+  width:100%;
   display:inline;
   margin:3px;
   border:1px solid #ffffff;
