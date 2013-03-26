@@ -19,7 +19,11 @@
 <span class="profileInfo well pull-left"><?php echo "<span id='frndprofileInfoTextWrapper'class='frndprofileInfoTextWrapper well pull-left'><p class='frndprofileInfoText'><h3>".$name."</h3>Birthday:".$bday."<br> School:".$school."<br>University".$university."<br>Employer:".$employer."</p></span>" ?> </span> 
 
 <div class="profileOptions fRight">
-<img class="fLeft" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon.jpg"; ?> /> </span>
+ <?php
+        if (isset($fid)) {
+            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend</a></div>";
+        }
+        ?> </span>
 </div>
 
 <br>
