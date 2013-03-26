@@ -12,7 +12,7 @@
 </div>
 
 <form class="fTop"class="navbar-search pull-left" method="post"id="searchProfileHead" action=<?php echo "".$base."/index.php/profile/Search" ?> >
-  <input type="text" name="SearchBox" class="search-query" placeholder="Search" />
+  <input type="text" name="SearchBox" class="search-query" placeholder="Search" data-source=" ["humayun","mena]" data-provide="typeahead"/>
 </form>
 <div id="clearfix"></div>
 <div id="logOut" class="fTop"><a class="btn"class="fTop" href=<?php echo "".$base."/index.php/profile/logout"?>> Log Out </a></div>
