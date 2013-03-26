@@ -170,11 +170,15 @@ class Main_model extends CI_Model {
         return $rows;
     }
 
-    public function displayPeople_model() {
-        $this->db->select('*');
-        $this->db->from('user_sign_up');
-        $query = $this->db->get();
 
+       public function displayPeople_model() {
+        
+
+		 $this->db->select('*');
+        $this->db->from('user_sign_up');
+        $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
+        $query = $this->db->get();
+		
 //        if ($query->num_rows > 0) {
         $row = $query->result_array();
         return $row;
@@ -182,6 +186,7 @@ class Main_model extends CI_Model {
 //        else
 //            return 0;
     }
+    
 
     public function addFriend($id, $fid) {
         $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $id));

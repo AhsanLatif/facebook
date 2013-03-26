@@ -11,6 +11,8 @@
   </ul>
 </div>
 <?php
+if(isset($friends))
+{
  $i=0;
  $frends=array();
         foreach ($friends as $friend) {
@@ -18,7 +20,8 @@
 		   $i=$i+1;
        
         }
-        ?>
+        };
+		$frends="junk";?>
 <form class="fTop"class="navbar-search pull-left" method="post"id="searchProfileHead" action=<?php echo "".$base."/index.php/profile/Search" ?> >
   <input type="text" name="SearchBox" id="search" data-items="4" class="search-query" placeholder="Search" data-provide="typeahead" data-source=<?php echo json_encode($frends); ?> autocomplete="off" />
 </form>
