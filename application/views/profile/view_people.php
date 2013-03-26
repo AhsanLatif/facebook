@@ -1,9 +1,30 @@
-<?php
-        foreach ($details as $detail){
-//            echo $detail['first_name'];
-            echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $detail['id'] . ">" . $detail['first_name'] . "</a>"; 
-//            <a href="http://www.w3schools.com">Visit W3Schools</a> 
-            echo '</br>';
-        } 
-          
+
+<?php 
+echo "<div class='fTop pull-left' id='searchPageGallery'>";
+ foreach ($details as $detail){
+$imageName=$detail['image_name'];
+$id=$detail['id'];
+if($imageName=="")
+{
+$imageName="defaultPic.gif";
+}
+if($id=="")
+{$id="63";}
+
+echo "
+ <div class='GalleryImage fTop'>
+  <a href=".$base . "/index.php/profile/viewProfile?id=" . $id.">
+  <img src="."" . $base . "/" . $uploads . "/" . $imageName . ""." width='110' height='90' />
+  </a>
+  <div class='GalleryCaption'>".$detail['first_name']."</div>
+</div>";
+}
+echo "</div>";
 ?>
+
+
+<div id="nothing">
+</div>
+<div class="clearfix">
+</div>
+<hr>
