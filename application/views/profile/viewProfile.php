@@ -44,24 +44,17 @@
 
 
 
+        <?php
+        if (isset($fid)) {
+            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend</a></div>";
+        }
+        ?>
 
    <div class="wall fLeft">
         <h1> Friends! </h1>
         <?php
         foreach ($friends as $friend) {
             echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a>";
-            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/deleteFriend?fid=" . $request['friend_id'] . "> Delete</a></div>";
-
-            echo '</br>';
-        }
-        ?>
-        <h1> Pending Requests! </h1>
-        <?php
-        foreach ($requests as $request) {
-            echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $request['friend_id'] . ">" . $request['friend_first_name'] . "</a>";
-            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/acceptRequest?fid=" . $request['friend_id'] . "> Accept</a></div>";
-            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/ignoreRequest?fid=" . $request['friend_id'] . "> Ignore</a></div>";
-
             echo '</br>';
         }
         ?>
