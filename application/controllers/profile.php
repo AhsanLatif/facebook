@@ -162,7 +162,7 @@ class profile extends CI_Controller {
 //        } 
 //        exit();        
         $this->load->view('header', $data);
-        $this->load->view('profile/loggedInNav', $data);
+		        $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/view_people', $data);
 //        $this->load->view('profile/index', $data);
         $this->load->view('footer', $data);
