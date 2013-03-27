@@ -489,8 +489,18 @@ width:15px;
 width:100%;
 
 }
-
-
+#addFriendButton
+{
+position:relative;
+bottom:30%;
+}
+.postWall
+{
+width:500px;
+height:50px;
+background-color:#CCCCFF;
+color:#000033;
+}
 /*Gallery reference : http://www.w3schools.com/css/css_image_gallery.asp */
 
 .GalleryImage
