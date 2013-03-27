@@ -120,7 +120,29 @@ $('#pictureChanger').css('z-index','1');
     title: 'Click to edit!',
 	placement: 'bottom'
   });
- 
+ //Wall functionality
+
+$('#buttonPost').click(function()
+{
+var wall=$('#post').val();
+alert(wall);
+var path=$('#path').val();
+var id=$('#id').val();
+var to=$('#fid').val();
+alert('here');
+$.ajax({
+type:'post',
+url:path,
+data:{'id':id,'fid':to,'post':wall},
+success:function(result)
+{
+var newPost="<div> <p>"+wall+"</p></div>";
+$(newPost).insertAfter('.helper');
+}
+});
+
+});
+
  
 });
 
