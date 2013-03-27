@@ -137,9 +137,14 @@
 <h1> Post Something! </h1>
 <hr>
 <form id="Wall" name="Wall">
-<input type="text" id="wallPost" name="wallPost"/></br>
-<input type="submit" class="btn" value="Post" />
+<input type="hidden" name='id' id='id' value=<?php echo "".$id."" ?> />
+<input type="hidden" name="path" id="path"  value=<?php echo "".$base."/index.php/profile/addWallPost"; ?> />
+<input type="hidden" name='fid' id='fid' value=<?php echo "".$id."" ?> />
+<input type="text" id="post" name="post"/></br>
+<input type="button" class="btn" id="buttonPost" value="Post" />
 </form>
+<div class="helper" >
+</div>
 
 <div class="nothing">
 </div>

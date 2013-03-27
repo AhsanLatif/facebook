@@ -175,6 +175,13 @@ class profile extends CI_Controller {
         $data = $this->main_model->load_media();
         redirect('/profile/index', 'refresh');
     }
+	public function addWallPost()
+	{
+		$to=$_POST['id'];
+		$from=$_POST['fid'];
+		$post=$_POST['post'];
+	echo	$this->main_model->addWallPost($to,$from,$post);
+	}
 
 }
 

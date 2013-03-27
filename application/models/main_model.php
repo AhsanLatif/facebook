@@ -266,7 +266,12 @@ class Main_model extends CI_Model {
             return 1;
         return -1;
     }
-
+	public function addWallPost($to,$from,$post)
+	{
+		$data=array('to_id'=>$to,'from_id'=>$from,'post'=>$post,'date_posted'=>date('Y-m-d H:i:s'));
+		$this->db->insert('wall_post',$data);
+		return;
+	}
 }
 
 ?>
