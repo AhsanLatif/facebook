@@ -3,7 +3,7 @@
 echo "<div class='fTop pull-left' id='searchPageGallery'>";
  foreach ($details as $detail){
 $imageName=$detail['image_name'];
-$id=$detail['id'];
+$id=$detail['user_id'];
 if($imageName=="")
 {
 $imageName="defaultPic.gif";
