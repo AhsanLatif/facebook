@@ -21,7 +21,7 @@
 <div class="profileOptions fRight">
  <?php
         if (isset($fid)) {
-            echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend</a></div>";
+            echo "<div  class='btn btn-primary'><a href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend</a></div>";
         }
         ?> </span>
 </div>
