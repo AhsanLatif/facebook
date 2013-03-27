@@ -136,12 +136,14 @@ url:path,
 data:{'id':id,'fid':to,'post':wall},
 success:function(result)
 {
-var newPost="<div> <p>"+wall+"</p></div>";
+var obj = jQuery.parseJSON(result);
+var newPost="<div class='postWall'> <p>"+obj.first_name+" "+obj.last_name+": "+wall+"</p></div>";
 $(newPost).insertAfter('.helper');
 }
 });
 
 });
+
 
  
 });

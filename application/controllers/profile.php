@@ -180,7 +180,8 @@ class profile extends CI_Controller {
 		$to=$_POST['id'];
 		$from=$_POST['fid'];
 		$post=$_POST['post'];
-	echo	$this->main_model->addWallPost($to,$from,$post);
+		$this->main_model->addWallPost($to,$from,$post);
+		echo json_encode($this->main_model->getUserDetailsById($from));
 	}
 
 }
