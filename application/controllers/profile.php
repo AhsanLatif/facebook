@@ -100,11 +100,11 @@ class profile extends CI_Controller {
         $data['employer'] = $details['employer'];
 
 
-          $id = $this->main_model->get_id($username);
-		  
-			$wallPost=$this->getWallPost($id);
-			$data['wallPost']=$wallPost;
-		$data['posted']=8;
+        $id = $this->main_model->get_id($username);
+
+        $wallPost = $this->getWallPost($id);
+        $data['wallPost'] = $wallPost;
+        $data['posted'] = 8;
         $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
 
@@ -112,10 +112,10 @@ class profile extends CI_Controller {
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
         $this->session->set_userdata($img);
-		$this->session->set_userdata(array('id'=>$id));
+        $this->session->set_userdata(array('id' => $id));
         $friends = $this->main_model->viewFriends($id);
         $data['friends'] = $friends;
-		
+
         $requests = $this->main_model->viewRequests($id);
         $data['requests'] = $requests;
 
@@ -143,21 +143,32 @@ class profile extends CI_Controller {
         $data['university'] = $details['university'];
         $data['employer'] = $details['employer'];
 
-        //  $id = $this->main_model->get_id($username);
+        $userid = $this->session->userdata('id');
+        $check = $this->main_model->ifFriend($userid, $id);
+        if ($check == 1){
+            $data['reqsent'] = 1;
+        }
+        else if ($check == 2){
+            $data['friend'] = 1;
+        }
+        else {
+            $data['fid'] = $id;
+        }
+//  $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
-
-        $data['fid'] = $id;
+        
+        
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
 
         $friends = $this->main_model->viewFriends($id);
         $data['friends'] = $friends;
 
-		//THE CHANGES!
-		$data['id']=$this->session->userdata('id');
-		$data['wallPost']=$this->getWallPost($id);
-		//End of CHANGES!!
-		
+        //THE CHANGES!
+        $data['id'] = $this->session->userdata('id');
+        $data['wallPost'] = $this->getWallPost($id);
+        //End of CHANGES!!
+
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/viewProfile', $data);
@@ -168,12 +179,13 @@ class profile extends CI_Controller {
         $details = $this->main_model->displayPeople_model();
         $data = $this->main_model->load_media();
         $data['details'] = $details;
+        $data['userid'] = $this->session->userdata('id');
 //        foreach ($details as $detail){
 //            echo $detail['first_name'];
 //        } 
 //        exit();        
         $this->load->view('header', $data);
-		        $this->load->view('profile/loggedInNav', $data);
+        $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/view_people', $data);
 //        $this->load->view('profile/index', $data);
         $this->load->view('footer', $data);
@@ -183,18 +195,19 @@ class profile extends CI_Controller {
         $data = $this->main_model->load_media();
         redirect('/profile/index', 'refresh');
     }
-	public function addWallPost()
-	{
-		$to=$_POST['fid'];
-		$from=$_POST['id'];
-		$post=$_POST['post'];
-		$this->main_model->addWallPost($to,$from,$post);
-		echo json_encode($this->main_model->getUserDetailsById($from));
-	}
-	public function getWallPost($id)
-	{
-		return $this->main_model->getWallPost($id);
-	}
+
+    public function addWallPost() {
+        $to = $_POST['fid'];
+        $from = $_POST['id'];
+        $post = $_POST['post'];
+        $this->main_model->addWallPost($to, $from, $post);
+        echo json_encode($this->main_model->getUserDetailsById($from));
+    }
+
+    public function getWallPost($id) {
+        return $this->main_model->getWallPost($id);
+    }
+
 }
 
 ?>

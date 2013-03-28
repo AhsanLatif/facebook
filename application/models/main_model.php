@@ -187,7 +187,7 @@ class Main_model extends CI_Model {
     }
 
     public function addFriend($id, $fid) {
-        $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $id));
+        $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $fid));
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
@@ -201,6 +201,20 @@ class Main_model extends CI_Model {
             'friend_last_name' => $friend_last_name
         );
         $this->db->insert('user_friends_request', $data);
+    }
+
+    public function ifFriend($userid, $id) {
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $userid, 'friend_id' => $id));
+
+        if ($query->num_rows() > 0) {
+            return 1;
+        }
+
+        $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $userid, 'friend_id' => $id));
+
+        if ($query->num_rows() > 0) {
+            return 2;
+        }
     }
 
     public function viewFriends($id) {
@@ -266,35 +280,34 @@ class Main_model extends CI_Model {
             return 1;
         return -1;
     }
-	public function addWallPost($to,$from,$post)
-	{
-		$data=array('to_id'=>$to,'from_id'=>$from,'post'=>$post,'date_posted'=>date('Y-m-d H:i:s'));
-		$this->db->insert('wall_post',$data);
-		return;
-	}
-	public function getWallPost($id)
-	{
-		$this->db->select('*');
-		$this->db->from('wall_post');
-		$this->db->where(array('to_id'=>$id));
-		$this->db->order_by("wall_post.id", "desc"); 
-		$this->db->join('user_sign_up', 'user_sign_up.id = wall_post.from_id');
-		$record=$this->db->get();
-		$i=0;
-		
-foreach($record->result() as $post):
-{
-$temp[$i]['first_name']=$post->first_name;
-$temp[$i]['last_name']=$post->last_name;
-$temp[$i]['post']=$post->post;
-$temp[$i]['id']=$post->id;
-$i++;
-}endforeach;
-if($i==0)
-$temp=0;
-		return $temp;
-	}
-}
 
+    public function addWallPost($to, $from, $post) {
+        $data = array('to_id' => $to, 'from_id' => $from, 'post' => $post, 'date_posted' => date('Y-m-d H:i:s'));
+        $this->db->insert('wall_post', $data);
+        return;
+    }
+
+    public function getWallPost($id) {
+        $this->db->select('*');
+        $this->db->from('wall_post');
+        $this->db->where(array('to_id' => $id));
+        $this->db->order_by("wall_post.id", "desc");
+        $this->db->join('user_sign_up', 'user_sign_up.id = wall_post.from_id');
+        $record = $this->db->get();
+        $i = 0;
+
+        foreach ($record->result() as $post): {
+                $temp[$i]['first_name'] = $post->first_name;
+                $temp[$i]['last_name'] = $post->last_name;
+                $temp[$i]['post'] = $post->post;
+                $temp[$i]['id'] = $post->id;
+                $i++;
+            }endforeach;
+        if ($i == 0)
+            $temp = 0;
+        return $temp;
+    }
+
+}
 
 ?>

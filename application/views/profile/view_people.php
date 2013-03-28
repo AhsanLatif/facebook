@@ -10,14 +10,14 @@ foreach ($details as $detail) {
     if ($id == "") {
         $id = "63";
     }
-
+if ($id != $userid){
     echo "
  <div class='GalleryImage fTop'>
   <a href=" . $base . "/index.php/profile/viewProfile?id=" . $id . ">
   <img src=" . "" . $base . "/" . $uploads . "/" . $imageName . "" . " width='110' height='90' />
   </a>
   <div class='GalleryCaption'>" . $detail['first_name'] . "</div>
-</div>";
+</div>";}
 }
 echo "</div>";
 ?>
