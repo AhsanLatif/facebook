@@ -113,63 +113,35 @@
     </div>
 
     <!--Start of page -->
+        <div class="helper" >
+            <div id="pro">
+                <button type="button" id="pictureChanger" data-toggle="modal" data-target="#pictureChange">Edit</button>
+                <img class="thumbnail fLeft" id="propic" src=<?php echo "" . $base . "/" . $uploads . "/" . $image_path . ""; ?>> </div>
+            <span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>" . $name . "</h3>Birthday:" . $bday . "<br> School:" . $school . "<br>University" . $university . "<br>Employer:" . $employer . "</p></span></a>" ?>
 
+                <div class="profileOptions fRight">
+                    <img class="fLeft" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon.jpg"; ?> />
 
-
-<div class="wall fTop">
-<h1> Post Something! </h1>
-<hr>
-<form id="Wall" name="Wall">
-<input type="hidden" name='id' id='id' value=<?php echo "".$id."" ?> />
-<input type="hidden" name="path" id="path"  value=<?php echo "".$base."/index.php/profile/addWallPost"; ?> />
-<input type="hidden" name='fid' id='fid' value=<?php echo "".$id."" ?> />
-<input type="text" id="post" name="post"/></br>
-<input type="button" class="btn" id="buttonPost" value="Post" />
-</form>
-<div class="helper" >
-</div>
-
-        <div id="pro">
-            <button type="button" id="pictureChanger" data-toggle="modal" data-target="#pictureChange">Edit</button>
-            <img class="thumbnail fLeft" id="propic" src=<?php echo "" . $base . "/" . $uploads . "/" . $image_path . ""; ?>> </div>
-        <span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>" . $name . "</h3>Birthday:" . $bday . "<br> School:" . $school . "<br>University" . $university . "<br>Employer:" . $employer . "</p></span></a>" ?>
-
-            <div class="profileOptions fRight">
-                <img class="fLeft" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon.jpg"; ?> />
-
-            </div>
-        </span><br>
-
-
-    </div>
+                </div>
+            </span><br>
+        </div>
 
 
     <div class="wall fTop">
         <h1> Post Something! </h1>
         <hr>
         <form id="Wall" name="Wall">
-            <input type="text" id="wallPost" name="wallPost"/></br>
-            <input type="submit" class="btn" value="Post" />
+            <input type="hidden" name='id' id='id' value=<?php echo "" . $id . "" ?> />
+            <input type="hidden" name="path" id="path"  value=<?php echo "" . $base . "/index.php/profile/addWallPost"; ?> />
+            <input type="hidden" name='fid' id='fid' value=<?php echo "" . $id . "" ?> />
+            <input type="text" id="post" name="post"/></br>
+            <input type="button" class="btn" id="buttonPost" value="Post" />
         </form>
-
-        <div class="nothing">
-        </div>
-    </div>
-
+ </div>
 
 
 </div>
-    <div class="wall fTop">
-        <h1> Post Something! </h1>
-        <hr>
-        <form id="Wall" name="Wall">
-            <input type="text" id="wallPost" name="wallPost"/></br>
-            <input type="submit" class="btn" value="Post" />
-        </form>
 
-        <div class="nothing">
-        </div>
-    </div>
 
 
 <div class="wall fLeft">
