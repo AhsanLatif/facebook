@@ -99,6 +99,12 @@ class profile extends CI_Controller {
         $data['university'] = $details['university'];
         $data['employer'] = $details['employer'];
 
+
+          $id = $this->main_model->get_id($username);
+		  
+			$wallPost=$this->getWallPost($id);
+			$data['wallPost']=$wallPost;
+		$data['posted']=8;
         $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
 
@@ -106,10 +112,10 @@ class profile extends CI_Controller {
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
         $this->session->set_userdata($img);
-
+		$this->session->set_userdata(array('id'=>$id));
         $friends = $this->main_model->viewFriends($id);
         $data['friends'] = $friends;
-
+		
         $requests = $this->main_model->viewRequests($id);
         $data['requests'] = $requests;
 
@@ -147,6 +153,11 @@ class profile extends CI_Controller {
         $friends = $this->main_model->viewFriends($id);
         $data['friends'] = $friends;
 
+		//THE CHANGES!
+		$data['id']=$this->session->userdata('id');
+		$data['wallPost']=$this->getWallPost($id);
+		//End of CHANGES!!
+		
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/viewProfile', $data);
@@ -174,13 +185,16 @@ class profile extends CI_Controller {
     }
 	public function addWallPost()
 	{
-		$to=$_POST['id'];
-		$from=$_POST['fid'];
+		$to=$_POST['fid'];
+		$from=$_POST['id'];
 		$post=$_POST['post'];
 		$this->main_model->addWallPost($to,$from,$post);
 		echo json_encode($this->main_model->getUserDetailsById($from));
 	}
-
+	public function getWallPost($id)
+	{
+		return $this->main_model->getWallPost($id);
+	}
 }
 
 ?>
