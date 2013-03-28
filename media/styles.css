@@ -337,7 +337,9 @@ border-color:gray;
 border-style:inset;
 border-width:2px;
 width:70%;
-height:700px;
+height:auto;
+min-height:700px;
+
 -webkit-border-radius:32px;
 -moz-border-radius:32px;
 border-radius:32px;
@@ -356,7 +358,8 @@ margin-top:1%;
 margin-left:13%;
 padding:10 10 10 10;
 width:70%;
-height:1000px;
+height:auto;
+min-height:1000px;
 }
 .profileInfo
 {
@@ -492,7 +495,9 @@ width:100%;
 #addFriendButton
 {
 position:relative;
-bottom:30%;
+float:top;
+top:-60;
+left:80;
 }
 .postWall
 {
@@ -500,6 +505,9 @@ width:500px;
 height:50px;
 background-color:#CCCCFF;
 color:#000033;
+border-width:2px;
+border-color:black;
+border-style:groove;
 }
 /*Gallery reference : http://www.w3schools.com/css/css_image_gallery.asp */
 
@@ -534,4 +542,18 @@ color:#000033;
   width:120px;
   margin:2px;
   }
+  #frendIcon
+  {
+ position:relative;
+float:top;
+top:-67; 
+left:-20;
+ }
+ #addFrendButton
+ {
+position:relative;
+float:top;
+top:50px;
+left:-400;
+ }
   

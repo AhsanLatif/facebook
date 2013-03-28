@@ -295,6 +295,6 @@ $temp=0;
 		return $temp;
 	}
 }
-}
+
 
 ?>

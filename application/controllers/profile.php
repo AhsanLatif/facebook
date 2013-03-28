@@ -99,9 +99,11 @@ class profile extends CI_Controller {
         $data['university'] = $details['university'];
         $data['employer'] = $details['employer'];
 
-			$wallPost=$this->getWallPost($id);
 
-        $data['id'] = $id;
+          $id = $this->main_model->get_id($username);
+		  
+			$wallPost=$this->getWallPost($id);
+			$data['wallPost']=$wallPost;
 		$data['posted']=8;
         $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
@@ -183,8 +185,8 @@ class profile extends CI_Controller {
     }
 	public function addWallPost()
 	{
-		$to=$_POST['id'];
-		$from=$_POST['fid'];
+		$to=$_POST['fid'];
+		$from=$_POST['id'];
 		$post=$_POST['post'];
 		$this->main_model->addWallPost($to,$from,$post);
 		echo json_encode($this->main_model->getUserDetailsById($from));

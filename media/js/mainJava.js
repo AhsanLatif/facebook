@@ -122,14 +122,13 @@ $('#pictureChanger').css('z-index','1');
   });
  //Wall functionality
 
+
 $('#buttonPost').click(function()
 {
 var wall=$('#post').val();
-alert(wall);
-var path=$('#path').val();
+var path=$('#path').val()+"/addWallPost";
 var id=$('#id').val();
 var to=$('#fid').val();
-alert('here');
 $.ajax({
 type:'post',
 url:path,
@@ -143,7 +142,7 @@ $(newPost).insertAfter('.helper');
 });
 
 });
-
+$('a').css('cursor','pointer');
 
  
 });
