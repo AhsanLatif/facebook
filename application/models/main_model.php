@@ -307,6 +307,21 @@ class Main_model extends CI_Model {
             $temp = 0;
         return $temp;
     }
+		public function getNotification($id)
+	{
+		$this->db->select('*');
+		$this->db->from('notification');
+		$this->db->order_by("id", "desc");
+		$this->db->where(array('user_id'=>$id));
+		return $this->db->get()->result();
+	}
+	public function Notify($id,$notification,$link)
+	{
+		$addition=array('user_id'=>$id, 'notice'=>$notification, 'link'=>$link);
+		$this->db->insert('notification',$addition);
+	}
+	
+	
 
 }
 
