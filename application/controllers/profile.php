@@ -183,7 +183,7 @@ class profile extends CI_Controller {
 
 
         $id = $this->main_model->get_id($username);
-
+			$data['notification']=$this->main_model->getNotification($id);
         $wallPost = $this->getWallPost($id);
         $data['wallPost'] = $wallPost;
         $data['posted'] = 8;

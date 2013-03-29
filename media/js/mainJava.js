@@ -166,6 +166,38 @@ $(document).ready(function() {
     
   
 //Notification stuff
+
+
+$(function()
+{
+var id=$('#currid').val();
+var base=$('#path').val();
+var path=$('#path').val()+"/getNotification";
+$.ajax({
+type:'post',
+url:path,
+data:{'id':id},
+success:function(data)
+{
+if(data!="nada")
+{
+var obj=jQuery.parseJSON(data);
+var html="";
+for(var i =0;i <obj.length-1;i++)
+{
+
+ html=html+"<li><a href="+base+"/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
+ 
+}
+$('#noList').html(html);
+$('#notifications button').css('background-color','red');
+
+}
+}
+});
+});
+
+
 setInterval(function() {
 
 
