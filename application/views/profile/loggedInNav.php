@@ -43,6 +43,6 @@ if(isset($friends))
   </form>
 
 <div id="clearfix"></div>
-<div id="logOut" class="fTop"><a class="btn"class="fTop" href=<?php echo "".$base."/index.php/profile/logout"?>> Log Out </a></div>
+<div id="logOut"><a href=<?php echo "".$base."/index.php/profile/logout"?>><img src=<?php echo "".$base."/".$images."/logout_button.gif" ?> class="fTop" /></a></div>
 
 </div>

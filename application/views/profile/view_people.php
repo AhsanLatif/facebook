@@ -22,17 +22,17 @@ else
 {
 foreach ($details as $detail) {
     $imageName = $detail['image_name'];
-    $id = $detail['user_id'];
+    $Uid = $detail['id'];
     if ($imageName == "") {
         $imageName = "defaultPic.gif";
     }
-    if ($id == "") {
-        $id = "63";
+    if ($Uid == "") {
+        $Uid = "63";
     }
-if ($id != $userid){
+if ($id != $Uid){
     echo "
  <div class='GalleryImage fTop'>
-  <a href=" . $base . "/index.php/profile/viewProfile?id=" . $id . ">
+  <a href=" . $base . "/index.php/profile/viewProfile?id=" . $Uid . ">
   <img src=" . "" . $base . "/" . $uploads . "/" . $imageName . "" . " width='110' height='90' />
   </a>
   <div class='GalleryCaption'>" . $detail['first_name'] . "</div>

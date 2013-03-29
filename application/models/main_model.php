@@ -175,7 +175,7 @@ class Main_model extends CI_Model {
 
         $this->db->select('*');
         $this->db->from('user_sign_up');
-        $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
+        $this->db->join('user_images', 'user_images.user_id = user_sign_up.id');
         $query = $this->db->get();
 
 //        if ($query->num_rows > 0) {

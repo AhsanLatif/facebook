@@ -22,12 +22,20 @@
 
 
 
-<body>
-
+<
 <div id="header">
-
-<a href=<?php echo "".$base."/index.php/home" ?>><img id="logo" src=<?php echo "".$base."/".$images."/login/logo.jpg"."";?> ></a>
+<?php 
+if(isset($id) || isset($currid))
+{
+$path=$base."/index.php/profile";
+}
+else
+{
+$path=$base."/index.php/home";
+}?>
+<a href=<?php echo $path ?>><img id="logo" src=<?php echo "".$base."/".$images."/login/logo.jpg"."";?> ></a>
 
 
 </div>
+
 </html>
