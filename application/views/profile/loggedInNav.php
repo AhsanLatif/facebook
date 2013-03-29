@@ -14,13 +14,16 @@
 <div class="dropdown" id="notifications">
   <button data-toggle="dropdown" > ! </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
-  <li id="noList"><a href="#"> </li>
+  <span id="noList"> </span>
 	  <li><a  href="#">   </a></li>
 	 <li><a  href="#">   </a></li>
 	  <li><a  href="#">   </a></li>
    
   </ul>
 </div>
+<input type="hidden" name='currid' id='currid' value=<?php echo $id ?> />
+<input type="hidden" name="path" id="path"  value=<?php echo "".$base."/index.php/profile"; ?> />
+
   <div id="searchButton"><a onclick="searchProfileHead.submit();"><img src=<?php echo "" . $base . "/" . $images . "/search.png"; ?> /> </a></div>
 
 <?php

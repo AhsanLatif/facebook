@@ -181,6 +181,7 @@ class profile extends CI_Controller {
         $data = $this->main_model->load_media();
         $data['details'] = $details;
         $data['userid'] = $this->session->userdata('id');
+			 $data['id'] = $this->session->userdata('id');
 //        foreach ($details as $detail){
 //            echo $detail['first_name'];
 //        } 
