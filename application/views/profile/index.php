@@ -123,7 +123,9 @@
         <span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>" . $name . "</h3>Birthday:" . $bday . "<br> School:" . $school . "<br>University" . $university . "<br>Employer:" . $employer . "</p></span></a>" ?>
 
             <div class="profileOptions fRight">
-                <img class="fLeft" id="frendIcon" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon.jpg"; ?> />
+			
+                <img class="fLeft" id="frendIcon" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon-large.gif"; ?> />
+				<br>
             </div>
         </span><br>
 

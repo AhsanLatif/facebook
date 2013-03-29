@@ -1,7 +1,14 @@
 <div id="loggedInNav">
 
-
-<div class="dropdown" id="notifications">
+<div class="dropdown" id="pendingRequests" class="pull-left">
+  <img data-toggle="dropdown" src=<?php echo "" . $base . "/" . $images . "/friends-icon.gif" ?> />
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li><a tabindex="-1" href="#">Action</a></li>
+    <li><a tabindex="-1" href="#">Another action</a></li>
+   
+  </ul>
+</div>
+<div class="dropdown" id="notifications" class="pull-left">
   <button data-toggle="dropdown" > ! </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
     <li><a tabindex="-1" href="#">Action</a></li>

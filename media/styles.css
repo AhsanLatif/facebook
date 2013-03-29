@@ -384,10 +384,11 @@ top:20%;
 .profileOptions img
 {
 border-color:black;
--moz-border-radius: 100%;
-border-radius:100%;
--webkit-border-radius: 100%;
 
+}
+.profileOptions label
+{
+left:-50;
 }
 
 #PasswordRecoveryBox
@@ -446,8 +447,9 @@ height:200px;
 #searchProfileHead
 {
 position:relative;
+float:left;
 right:70%;
-top:10px;
+top:-10;
 }
 #searchProfileHead input
 {
@@ -463,14 +465,15 @@ top:210px;
 #logOut
 {
 position:relative;
+float:left;
 right:-70px;
-top:-60px;
+top:-80px;
 }
 
 #notifications
 {
 
-top:32px;
+top:6px;
 right:400%;
 }
 #notifications button
@@ -556,4 +559,19 @@ float:top;
 top:50px;
 left:-400;
  }
-  
+#pendingRequests
+{
+
+top:32px;
+right:420%;
+}
+#pendingRequests img
+{
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+border-radius:5px;
+padding: 2 2 2 2;
+color:white;
+width:30px;
+height:20px;
+}
