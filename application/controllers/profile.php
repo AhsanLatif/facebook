@@ -145,6 +145,7 @@ class profile extends CI_Controller {
 
         $userid = $this->session->userdata('id');
         $check = $this->main_model->ifFriend($userid, $id);
+			$data['myID']=$id;
         if ($check == 1){
             $data['reqsent'] = 1;
         }
