@@ -36,10 +36,20 @@
         </div>
         <div class="modal-body">
             <div class="GalleryImage">
-                <a target="_blank" href="klematis_big.htm">
-                    <img src="http://fellowshipofminds.files.wordpress.com/2012/04/mickey-mouse-mickey-mouse-29454673-1024-768.jpg" alt="Klematis" width="110" height="90">
-                </a>
-                <div class="GalleryCaption">Person's Name</div>
+
+                <?php
+                foreach ($friends as $friend) {
+//                    echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a>";
+
+//                    echo '<a target="_blank" href="klematis_big.htm">';
+
+                    echo' <img src="http://fellowshipofminds.files.wordpress.com/2012/04/mickey-mouse-mickey-mouse-29454673-1024-768.jpg" alt="Klematis" width="110" height="90">
+                </a>';
+                    echo "<div class='GalleryCaption'><a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a></div>";
+
+//                    echo' <div class="GalleryCaption">Person Name</div>';
+                }
+                ?>
             </div>
 
         </div>
@@ -123,9 +133,9 @@
         <span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>" . $name . "</h3>Birthday:" . $bday . "<br> School:" . $school . "<br>University" . $university . "<br>Employer:" . $employer . "</p></span></a>" ?>
 
             <div class="profileOptions fRight">
-			
+
                 <img class="fLeft" id="frendIcon" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon-large.gif"; ?> />
-				<br>
+                <br>
             </div>
         </span><br>
 
@@ -166,30 +176,6 @@
 
 
 </div>
-
-
-<div class="wall fLeft">
-    <h1> Friends! </h1>
-<?php
-foreach ($friends as $friend) {
-    echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a>";
-    echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/deleteFriend?fid=" . $request['friend_id'] . "> Delete</a></div>";
-
-    echo '</br>';
-}
-?>
-    <h1> Pending Requests! </h1>
-    <?php
-    foreach ($requests as $request) {
-        echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $request['friend_id'] . ">" . $request['friend_first_name'] . "</a>";
-        echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/acceptRequest?fid=" . $request['friend_id'] . "> Accept</a></div>";
-        echo "<div id='pictureControl' class='btn btn-primary'><a href=" . $base . "/index.php/friends/ignoreRequest?fid=" . $request['friend_id'] . "> Ignore</a></div>";
-
-        echo '</br>';
-    }
-    ?>
-</div>
-
 
 </div>
 

@@ -145,20 +145,21 @@ class profile extends CI_Controller {
 
         $userid = $this->session->userdata('id');
         $check = $this->main_model->ifFriend($userid, $id);
-			$data['myID']=$id;
-        if ($check == 1){
+        $data['myID'] = $id;
+
+        if ($check == 1) {
+            $data['reqaccept'] = 1;
+        } else if ($check == 2) {
+            $data['friend'] = 1;
+        } else if ($check == 3) {
             $data['reqsent'] = 1;
         }
-        else if ($check == 2){
-            $data['friend'] = 1;
-        }
-        else {
-            $data['fid'] = $id;
-        }
+        $data['fid'] = $id;
+
 //  $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
-        
-        
+
+
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
 

@@ -37,13 +37,15 @@
                 <img class="fLeft" id="frendIcon" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon-mutual.gif"; ?> />
 
                 <?php
-                if (isset($reqsent)) {
-                    echo "<a  id='addFrendButton' class='btn btn-primary' href='#'> Request Pending </a>";
-                }
-                if (isset($friend)) {
-//                echo "<a  id='addFrendButton' class='btn btn-primary' href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend </a>";
-                }
-                if (isset($fid)) {
+                if (isset($reqaccept)) {
+                    echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/acceptRequest?fid=" . $fid . "> Accept Request </a>";
+//                    echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/ignoreRequest?fid=" . $fid . "> Ignore Request </a>";
+                
+                } else if (isset($friend)) {
+                    echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/deleteFriend?fid=" . $fid . "> Delete Friend </a>";
+                } else if (isset($reqsent)) {
+                    echo "<a  id='addFrendButton' class='btn btn-primary link' href='#'> Request Pending </a>";
+                } else if (isset($fid)) {
                     echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend </a>";
                 }
                 ?>

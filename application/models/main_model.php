@@ -187,7 +187,7 @@ class Main_model extends CI_Model {
     }
 
     public function addFriend($id, $fid) {
-        $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $fid));
+        $query = $this->db->select('first_name, last_name')->get_where('user_sign_up', array('id' => $id));
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
@@ -204,10 +204,22 @@ class Main_model extends CI_Model {
     }
 
     public function ifFriend($userid, $id) {
-        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $userid, 'friend_id' => $id));
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $userid));
 
         if ($query->num_rows() > 0) {
             return 1;
+        }
+
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $userid, 'friend_id' => $id));
+
+        if ($query->num_rows() > 0) {
+            return 3;
+        }
+
+        $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $id, 'friend_id' => $userid));
+
+        if ($query->num_rows() > 0) {
+            return 2;
         }
 
         $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $userid, 'friend_id' => $id));
@@ -230,7 +242,7 @@ class Main_model extends CI_Model {
     public function viewRequests($id) {
         $this->db->select('*');
         $this->db->from('user_friends_request');
-        $this->db->where('user_id', $id);
+        $this->db->where('friend_id', $id);
         $query = $this->db->get();
 
         $row = $query->result_array();
@@ -239,16 +251,33 @@ class Main_model extends CI_Model {
 
     public function ignoreRequest($id, $fid) {
         $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $fid));
-        $this->db->delete('user_friends_request', array('id' => $row->id));
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $this->db->delete('user_friends_request', array('id' => $row->id));
+        }
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $fid, 'friend_id' => $id));
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $this->db->delete('user_friends_request', array('id' => $row->id));
+        }
     }
 
     public function deleteFriend($id, $fid) {
         $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $id, 'friend_id' => $fid));
-        $this->db->delete('user_friends_request', array('id' => $row->id));
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $this->db->delete('user_friends', array('id' => $row->id));
+        }
+
+        $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $fid, 'friend_id' => $id));
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $this->db->delete('user_friends', array('id' => $row->id));
+        }
     }
 
     public function acceptRequest($id, $fid) {
-        $query = $this->db->select('id, friend_first_name, friend_last_name')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $fid));
+        $query = $this->db->select('id, friend_first_name, friend_last_name')->get_where('user_friends_request', array('user_id' => $fid, 'friend_id' => $id));
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
