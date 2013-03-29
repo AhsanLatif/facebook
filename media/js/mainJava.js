@@ -4,12 +4,11 @@ $(document).ready(function() {
     $( ".link" ).on( "click", function(e) {
         e.preventDefault();
         var link = $( ".link" ).attr('href');
-//        alert(link);
+        //        alert(link);
         $.ajax({
             url: link,
             type: 'get',
             success: function( data ) {
-                //                alert(link);
                 $( ".link" ).html( "<strong>"+ data + "</strong>" );
             }
         });

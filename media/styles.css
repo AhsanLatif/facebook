@@ -577,13 +577,13 @@ left:-400;
 
 top:32px;
 right:420%;
+height:auto;
 }
 #pendingRequests img
 {
 -webkit-border-radius:5px;
 -moz-border-radius:5px;
 border-radius:5px;
-padding: 2 2 2 2;
 color:white;
 width:30px;
 height:20px;

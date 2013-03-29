@@ -1,19 +1,23 @@
 <div id="loggedInNav">
 
-<div class="dropdown" id="pendingRequests" class="pull-left">
+<div  id="pendingRequests" class="dropdown">
   <img data-toggle="dropdown" src=<?php echo "" . $base . "/" . $images . "/friends-icon.gif" ?> />
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a tabindex="-1" href="#">Action</a></li>
-    <li><a tabindex="-1" href="#">Another action</a></li>
+  <ul class="dropdown-menu pull-left">
+    <li><a href="#">Action</a></li>
+    <li><a  href="#">Another action</a></li>
+    <li><a  href="#">   </a></li>
+	 <li><a  href="#">   </a></li>
+	  <li><a  href="#">   </a></li>
    
   </ul>
 </div>
-<div class="dropdown" id="notifications" class="pull-left">
+<div class="dropdown" id="notifications">
   <button data-toggle="dropdown" > ! </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a tabindex="-1" href="#">Action</a></li>
-    <li><a tabindex="-1" href="#">Another action</a></li>
-    <li><a tabindex="-1" href="#">Something else here</a></li>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
+  <li id="noList"><a href="#"> </li>
+	  <li><a  href="#">   </a></li>
+	 <li><a  href="#">   </a></li>
+	  <li><a  href="#">   </a></li>
    
   </ul>
 </div>
