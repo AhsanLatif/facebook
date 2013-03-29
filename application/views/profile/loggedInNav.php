@@ -17,6 +17,8 @@
    
   </ul>
 </div>
+  <div id="searchButton"><a onclick="searchProfileHead.submit();"><img src=<?php echo "" . $base . "/" . $images . "/search.png"; ?> /> </a></div>
+
 <?php
 if(isset($friends))
 {
@@ -31,7 +33,7 @@ if(isset($friends))
 		$frends="junk";?>
 <form class="fTop"class="navbar-search pull-left" method="post"id="searchProfileHead" action=<?php echo "".$base."/index.php/profile/Search" ?> >
   <input type="text" name="SearchBox" id="search" data-items="4" class="search-query" placeholder="Search" data-provide="typeahead" data-source=<?php echo json_encode($frends); ?> autocomplete="off" />
-</form>
+  </form>
 
 <div id="clearfix"></div>
 <div id="logOut" class="fTop"><a class="btn"class="fTop" href=<?php echo "".$base."/index.php/profile/logout"?>> Log Out </a></div>

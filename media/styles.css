@@ -303,6 +303,7 @@ position:relative;
 float:top;
 width:70%;
 height:300px;
+min-height:300px;
 left:13.5%;
 
 }
@@ -455,6 +456,18 @@ top:-10;
 {
 height:30px;
 }
+#searchButton
+{
+position:relative;
+float:left;
+float:top;
+width:20px;
+height:30px;
+bottom:50%;
+z-index:30;
+left:20%;
+top:-30;
+}
 #pictureChanger
 {
 display:none;
@@ -467,7 +480,7 @@ top:210px;
 position:relative;
 float:left;
 right:-70px;
-top:-80px;
+bottom:120px;
 }
 
 #notifications
