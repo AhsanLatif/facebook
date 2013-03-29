@@ -479,8 +479,8 @@ top:210px;
 {
 position:relative;
 float:left;
-right:-70px;
-bottom:120px;
+right:-150px;
+bottom:90;
 }
 
 #notifications
@@ -562,7 +562,7 @@ border-style:groove;
   {
  position:relative;
 float:top;
-top:-67; 
+bottom:27; 
 left:-20;
  }
  #addFrendButton

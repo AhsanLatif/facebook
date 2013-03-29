@@ -60,8 +60,7 @@
     <hr>
     <form id="Wall" name="Wall">
         <input type="hidden" name='id' id='id' value=<?php echo "" . $id . "" ?> /> 
-        <input type="hidden" name="path" id="path"  value=<?php echo "" . $base . "/index.php/profile/addWallPost"; ?> />
-        <input type="hidden" name='fid' id='fid' value=<?php echo "" . $fid . "" ?> />
+        <input type="hidden" name='fid' id='fid' value=<?php echo "" . $myID . "" ?> />
         <input type="text" id="post" name="post"/></br>
         <input type="button" class="btn" id="buttonPost" value="Post" />
     </form>
