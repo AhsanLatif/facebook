@@ -9,87 +9,76 @@ class profile extends CI_Controller {
         $this->load->library('session');
     }
 
-   	public function filteredSearch()
-	{
-	$i=0;
-	 if(isset($_POST['fname']) && $_POST['fname']!="")
-	 {
-	
-		$query[$i]=array('first_name'=>$_POST['fname']);
-		$i++;
-	 }
-	  if(isset($_POST['lname']) && $_POST['lname']!="")
-	 {
-		
-		$query[$i]=array('last_name'=>$_POST['lname']);
-		$i++;
-	 }
-	  if(isset($_POST['school']) && $_POST['school']!="")
-	 {
-		
-		$query[$i]=array('school'=>$_POST['school']);
-		$i++;
-	 }
-	  if(isset($_POST['uni']) && $_POST['uni']!="")
-	 {
-		$query[$i]=array('university'=>$_POST['uni']);
-		$i++;
-	 }
-	  if(isset($_POST['emp']) && $_POST['emp']!="")
-	 {
-		
-		$query[$i]=array('employer'=>$_POST['emp']);
-		$i++;
-	 }
-	 if(isset($_POST['city']) && $_POST['city']!="")
-	 {
-		$query[$i]=array('city'=>$_POST['city']);
-	 }
-	 
-	 if($i==0)
-		$this->displayPeople();
-	else
-	{
-		$resource=$this->main_model->filteredSearch($query);
-		$data = $this->main_model->load_media();
-        $data['details'] = $resource;
-        $data['userid'] = $this->session->userdata('id');
-		$data['id'] = $this->session->userdata('id');
-        $this->load->view('header', $data);
-        $this->load->view('profile/loggedInNav', $data);
-        $this->load->view('profile/view_people', $data);
-        $this->load->view('footer', $data);
-	}
-	
-	
-	}
+    public function filteredSearch() {
+        $i = 0;
+        if (isset($_POST['fname']) && $_POST['fname'] != "") {
+
+            $query[$i] = array('first_name' => $_POST['fname']);
+            $i++;
+        }
+        if (isset($_POST['lname']) && $_POST['lname'] != "") {
+
+            $query[$i] = array('last_name' => $_POST['lname']);
+            $i++;
+        }
+        if (isset($_POST['school']) && $_POST['school'] != "") {
+
+            $query[$i] = array('school' => $_POST['school']);
+            $i++;
+        }
+        if (isset($_POST['uni']) && $_POST['uni'] != "") {
+            $query[$i] = array('university' => $_POST['uni']);
+            $i++;
+        }
+        if (isset($_POST['emp']) && $_POST['emp'] != "") {
+
+            $query[$i] = array('employer' => $_POST['emp']);
+            $i++;
+        }
+        if (isset($_POST['city']) && $_POST['city'] != "") {
+            $query[$i] = array('city' => $_POST['city']);
+        }
+
+        if ($i == 0)
+            $this->displayPeople();
+        else {
+            $resource = $this->main_model->filteredSearch($query);
+            $data = $this->main_model->load_media();
+            $data['details'] = $resource;
+            $data['userid'] = $this->session->userdata('id');
+            $data['id'] = $this->session->userdata('id');
+            $this->load->view('header', $data);
+            $this->load->view('profile/loggedInNav', $data);
+            $this->load->view('profile/view_people', $data);
+            $this->load->view('footer', $data);
+        }
+    }
+
     public function Search() {
         $query = $_POST['SearchBox'];
-			if($query=="")
-		{
-			$this->displayPeople();
-			return;
-		}
-		$data=array('0'=>'firstname','1'=>'lastname','2'=>'school','3'=>'university','4'=>'employer','5'=>'city');
-        $i=0;
-		do{
-		$resource = $this->main_model->search($query, $data[$i]);
-		if($resource!="0")
-		{
-			$resource2 = $this->main_model->search($query, $data[$i+1]);
-			if($resource2!="0")
-			{$resource=array_merge($resource,$resource2);
-			}
-			$i++;
-		}
-		$i++;
-		}while($resource=="0" && $i<=5);
-		
-		
-		$data = $this->main_model->load_media();
+        if ($query == "") {
+            $this->displayPeople();
+            return;
+        }
+        $data = array('0' => 'firstname', '1' => 'lastname', '2' => 'school', '3' => 'university', '4' => 'employer', '5' => 'city');
+        $i = 0;
+        do {
+            $resource = $this->main_model->search($query, $data[$i]);
+            if ($resource != "0") {
+                $resource2 = $this->main_model->search($query, $data[$i + 1]);
+                if ($resource2 != "0") {
+                    $resource = array_merge($resource, $resource2);
+                }
+                $i++;
+            }
+            $i++;
+        } while ($resource == "0" && $i <= 5);
+
+
+        $data = $this->main_model->load_media();
         $data['details'] = $resource;
         $data['userid'] = $this->session->userdata('id');
-		$data['id'] = $this->session->userdata('id');
+        $data['id'] = $this->session->userdata('id');
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/view_people', $data);
@@ -183,7 +172,7 @@ class profile extends CI_Controller {
 
 
         $id = $this->main_model->get_id($username);
-			$data['notification']=$this->main_model->getNotification($id);
+        $data['notification'] = $this->main_model->getNotification($id);
         $wallPost = $this->getWallPost($id);
         $data['wallPost'] = $wallPost;
         $data['posted'] = 8;
@@ -226,6 +215,9 @@ class profile extends CI_Controller {
         $data['employer'] = $details['employer'];
 
         $userid = $this->session->userdata('id');
+        $requests = $this->main_model->viewRequests($userid); 
+        $data['requests'] = $requests;
+        
         $check = $this->main_model->ifFriend($userid, $id);
         $data['myID'] = $id;
 
@@ -235,6 +227,8 @@ class profile extends CI_Controller {
             $data['friend'] = 1;
         } else if ($check == 3) {
             $data['reqsent'] = 1;
+        } else {
+            $data['abc'] = 1;
         }
         $data['fid'] = $id;
 
@@ -244,9 +238,12 @@ class profile extends CI_Controller {
 
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);
+//
+//        $friends = $this->main_model->viewFriends($id);
+//        $data['friends'] = $friends;
 
-        $friends = $this->main_model->viewFriends($id);
-        $data['friends'] = $friends;
+        $mutualfriends = $this->main_model->viewMutualFriends($userid, $id);
+        $data['mutualfriends'] = $mutualfriends;
 
         //THE CHANGES!
         $data['id'] = $this->session->userdata('id');
@@ -264,7 +261,7 @@ class profile extends CI_Controller {
         $data = $this->main_model->load_media();
         $data['details'] = $details;
         $data['userid'] = $this->session->userdata('id');
-			 $data['id'] = $this->session->userdata('id');
+        $data['id'] = $this->session->userdata('id');
 //        foreach ($details as $detail){
 //            echo $detail['first_name'];
 //        } 

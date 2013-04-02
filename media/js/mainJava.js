@@ -4,7 +4,7 @@ $(document).ready(function() {
     $( ".link" ).on( "click", function(e) {
         e.preventDefault();
         var link = $( ".link" ).attr('href');
-        //        alert(link);
+        //  alert(link);
         $.ajax({
             url: link,
             type: 'get',
@@ -13,8 +13,22 @@ $(document).ready(function() {
             }
         });
     });
-  
-  
+    
+    $( ".link12" ).on( "click", function(e) {
+        e.preventDefault();
+        var link = $( ".link12" ).attr('href');
+        //        alert(link);
+        $(".link").remove();
+        
+        $.ajax({
+            url: link,
+            type: 'get',
+            success: function( data ) {
+                $( ".link12" ).html( "<strong>"+ data + "</strong>" );   
+            }
+        });
+    });
+    
     $('body').css('width',$(window).width());
     $('body').css('width',document.body.offsetWidth);
 
@@ -163,71 +177,75 @@ $(document).ready(function() {
 
     });
     $('a').css('cursor','pointer');
-    
-  
-//Notification stuff
+
+    //Notification stuff
 
 
-$(function()
-{
-var id=$('#currid').val();
-var base=$('#path').val();
-var path=$('#path').val()+"/getNotification";
-$.ajax({
-type:'post',
-url:path,
-data:{'id':id},
-success:function(data)
-{
-if(data!="nada")
-{
-var obj=jQuery.parseJSON(data);
-var html="";
-for(var i =0;i <obj.length-1;i++)
-{
+    $(function()
+    {
+        var id=$('#currid').val();
+        var base=$('#path').val();
+        var path=$('#path').val()+"/getNotification";
+        $.ajax({
+            type:'post',
+            url:path,
+            data:{
+                'id':id
+            },
+            success:function(data)
+            {
+                if(data!="nada")
+                {
+                    var obj=jQuery.parseJSON(data);
+                    var html="";
+                    for(var i =0;i <obj.length-1;i++)
+                    {
 
- html=html+"<li><a href="+base+"/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
+                        html=html+"<li><a href="+base+"/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
  
-}
-$('#noList').html(html);
-$('#notifications button').css('background-color','red');
+                    }
+                    $('#noList').html(html);
+                    if(i>0)
+                    {
+                        $('#notifications button').css('background-color','red');
+                    }
 
-}
-}
-});
-});
+                }
+            }
+        });
+    });
 
+    setInterval(function() {
+        var id=$('#currid').val();
+        var base=$('#path').val();
+        var path=$('#path').val()+"/getNotification";
+        $.ajax({
+            type:'post',
+            url:path,
+            data:{
+                'id':id
+            },
+            success:function(data)
+            {
+                if(data!="nada")
+                {
+                    var obj=jQuery.parseJSON(data);
+                    var html="";
+                    for(var i =0;i <obj.length-1;i++)
+                    {
+                        html=html+"<li><a href="+base+"/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
+                    }
+                    $('#noList').html(html);
+                    if(i>0)
+                    {
+                        $('#notifications button').css('background-color','red');
+                    }
 
-setInterval(function() {
+                }
 
-
-var id=$('#currid').val();
-var path=$('#path').val()+"/getNotification";
-$.ajax({
-type:'post',
-url:path,
-data:{'id':id},
-success:function(data)
-{
-if(data!="nada")
-{
-var obj=jQuery.parseJSON(data);
-var html="";
-for(var i =0;i <obj.length-1;i++)
-{
-
- html=html+"<li><a href="+obj[i].link+">"+obj[i].notice+"</a></li>";
- 
-}
-$('#noList').html(html);
-$('#notifications button').css('background-color','red');
-
-}
-}
-});
-   
-}, 5000);  
-
+            }
+        });
+    }, 5000);
  
 });
 

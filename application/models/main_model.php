@@ -204,17 +204,6 @@ class Main_model extends CI_Model {
     }
 
     public function ifFriend($userid, $id) {
-        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $userid));
-
-        if ($query->num_rows() > 0) {
-            return 1;
-        }
-
-        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $userid, 'friend_id' => $id));
-
-        if ($query->num_rows() > 0) {
-            return 3;
-        }
 
         $query = $this->db->select('id')->get_where('user_friends', array('user_id' => $id, 'friend_id' => $userid));
 
@@ -227,16 +216,55 @@ class Main_model extends CI_Model {
         if ($query->num_rows() > 0) {
             return 2;
         }
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $id, 'friend_id' => $userid));
+
+        if ($query->num_rows() > 0) {
+            return 1;
+        }
+
+        $query = $this->db->select('id')->get_where('user_friends_request', array('user_id' => $userid, 'friend_id' => $id));
+
+        if ($query->num_rows() > 0) {
+            return 3;
+        }
     }
 
     public function viewFriends($id) {
         $this->db->select('*');
         $this->db->from('user_friends');
-        $this->db->where('user_id', $id);
+        $this->db->where('user_friends.user_id', $id);
+        $this->db->join('user_images', 'user_images.user_id = user_friends.friend_id', 'left');
         $query = $this->db->get();
 
         $row = $query->result_array();
+
         return $row;
+    }
+
+    public function viewMutualFriends($id, $fid) {
+        $this->db->select('*');
+        $this->db->from('user_friends');
+        $this->db->where('user_friends.user_id', $id);
+        $this->db->join('user_images', 'user_images.user_id = user_friends.friend_id', 'left');
+        $query = $this->db->get();
+        $row = $query->result_array();
+
+        $this->db->select('*');
+        $this->db->from('user_friends');
+        $this->db->where('user_friends.user_id', $fid);
+        $this->db->join('user_images', 'user_images.user_id = user_friends.friend_id', 'left');
+        $query = $this->db->get();
+        $row1 = $query->result_array();
+
+        $result = Array();
+        foreach ($row as $friend) {
+            foreach ($row1 as $friend1) {
+                if ($friend['friend_id'] == $friend1['friend_id']) {
+                    array_push($result, $friend);
+                }
+            }
+        }
+        return $result;
     }
 
     public function viewRequests($id) {
@@ -284,13 +312,30 @@ class Main_model extends CI_Model {
             $friend_first_name = $row->friend_first_name;
             $friend_last_name = $row->friend_last_name;
         }
-
-
         $data = Array(
             'user_id' => $id,
             'friend_id' => $fid,
             'friend_first_name' => $friend_first_name,
             'friend_last_name' => $friend_last_name
+        );
+        $this->db->insert('user_friends', $data);
+
+//        $row = getUserDetailsById($fid);
+        $this->db->select('*');
+        $this->db->from('user_sign_up');
+        $this->db->where('user_sign_up.id', $id);
+        $this->db->join('user_info', 'user_info.user_id = user_sign_up.id', 'left');
+        $query = $this->db->get();
+
+        if ($query->num_rows > 0) {
+            $row1 = $query->row_array();
+        }
+
+        $data = Array(
+            'user_id' => $fid,
+            'friend_id' => $id,
+            'friend_first_name' => $row1['first_name'],
+            'friend_last_name' => $row1['last_name']
         );
         $this->db->insert('user_friends', $data);
         $this->db->delete('user_friends_request', array('id' => $row->id));
@@ -336,124 +381,114 @@ class Main_model extends CI_Model {
             $temp = 0;
         return $temp;
     }
-		public function getNotification($id)
-	{
-		$this->db->select('*');
-		$this->db->from('notification');
-		$this->db->order_by("id", "desc");
-		$this->db->where(array('user_id'=>$id));
-		return $this->db->get()->result();
-	}
-	public function Notify($id,$notification,$link)
-	{
-		$addition=array('user_id'=>$id, 'notice'=>$notification, 'link'=>$link);
-		$this->db->insert('notification',$addition);
-	}
-	public function search ($name, $type)
-	{		
-		if( $type == "firstname" )
-		{	
-			$this->db->select('*');
-			$this->db->from('user_sign_up');
-			$this->db->order_by("first_name", "asc");
-			$this->db->where(array('first_name' => $name));
+
+    public function getNotification($id) {
+        $this->db->select('*');
+        $this->db->from('notification');
+        $this->db->order_by("id", "desc");
+        $this->db->where(array('user_id' => $id));
+        return $this->db->get()->result();
+    }
+
+    public function Notify($id, $notification, $link) {
+        $addition = array('user_id' => $id, 'notice' => $notification, 'link' => $link);
+        $this->db->insert('notification', $addition);
+    }
+
+    public function search($name, $type) {
+        if ($type == "firstname") {
+            $this->db->select('*');
+            $this->db->from('user_sign_up');
+            $this->db->order_by("first_name", "asc");
+            $this->db->where(array('first_name' => $name));
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-			
-		} // IF ENDS
-		
-		if( $type == "lastname" )
-		{
-			$this->db->select('*');
-			$this->db->from('user_sign_up');
-			$this->db->order_by("last_name", "asc");
-			$this->db->where(array('last_name' => $name));
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+
+        if ($type == "lastname") {
+            $this->db->select('*');
+            $this->db->from('user_sign_up');
+            $this->db->order_by("last_name", "asc");
+            $this->db->where(array('last_name' => $name));
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-		} // IF ENDS
-		
-		if ( $type == "school" )
-		{
-			$this->db->select('*');
-			$this->db->from('user_info');
-			$this->db->order_by("school", "asc");
-			$this->db->where(array('school' => $name));
-			$this->db->join('user_sign_up','user_info.user_id=user_sign_up.id','left');
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+
+        if ($type == "school") {
+            $this->db->select('*');
+            $this->db->from('user_info');
+            $this->db->order_by("school", "asc");
+            $this->db->where(array('school' => $name));
+            $this->db->join('user_sign_up', 'user_info.user_id=user_sign_up.id', 'left');
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-		} // IF ENDS
-		
-		if ( $type == "university")
-		{
-			$this->db->select('*');
-			$this->db->from('user_info');
-			$this->db->order_by("university", "asc");
-			$this->db->where(array('university' => $name));
-						$this->db->join('user_sign_up','user_info.user_id=user_sign_up.id','left');
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+
+        if ($type == "university") {
+            $this->db->select('*');
+            $this->db->from('user_info');
+            $this->db->order_by("university", "asc");
+            $this->db->where(array('university' => $name));
+            $this->db->join('user_sign_up', 'user_info.user_id=user_sign_up.id', 'left');
 
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-			
-		} // IF ENDS
-		
-		if( $type = "employer")
-		{
-			$this->db->select('*');
-			$this->db->from('user_info');
-			$this->db->order_by("employer", "asc");
-			$this->db->where(array('employer' => $name));
-						$this->db->join('user_sign_up','user_info.user_id=user_sign_up.id','left');
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+
+        if ($type = "employer") {
+            $this->db->select('*');
+            $this->db->from('user_info');
+            $this->db->order_by("employer", "asc");
+            $this->db->where(array('employer' => $name));
+            $this->db->join('user_sign_up', 'user_info.user_id=user_sign_up.id', 'left');
 
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";		
-		} // IF ENDS
-		
-		if ( $type == "city")
-		{
-			$this->db->select('*');
-			$this->db->from('user_info');
-			$this->db->order_by("city", "asc");
-			$this->db->where(array('city' => $name));
-						$this->db->join('user_sign_up','user_info.user_id=user_sign_up.id','left');
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+
+        if ($type == "city") {
+            $this->db->select('*');
+            $this->db->from('user_info');
+            $this->db->order_by("city", "asc");
+            $this->db->where(array('city' => $name));
+            $this->db->join('user_sign_up', 'user_info.user_id=user_sign_up.id', 'left');
 
             $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-			
-		} // IF ENDS
-		
-	} 
-	public function filteredSearch($where)
-	{
-		$this->db->select('*');
-			$this->db->from('user_sign_up');
-			$this->db->join('user_info','user_info.user_id=user_sign_up.id','left');
-            $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
-			foreach ($where as $c):
-			{$this->db->where($c);}endforeach;
-			$query=$this->db->get();
-			if($query->num_rows>0)
-				return $query->result_array();
-			return "0";
-	}
-	
+            $query = $this->db->get();
+            if ($query->num_rows > 0)
+                return $query->result_array();
+            return "0";
+        } // IF ENDS
+    }
+
+    public function filteredSearch($where) {
+        $this->db->select('*');
+        $this->db->from('user_sign_up');
+        $this->db->join('user_info', 'user_info.user_id=user_sign_up.id', 'left');
+        $this->db->join('user_images', 'user_images.user_id = user_sign_up.id', 'left');
+        foreach ($where as $c): {
+                $this->db->where($c);
+            }endforeach;
+        $query = $this->db->get();
+        if ($query->num_rows > 0)
+            return $query->result_array();
+        return "0";
+    }
 
 }
 

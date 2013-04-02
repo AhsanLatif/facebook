@@ -36,18 +36,10 @@
         </div>
         <div class="modal-body">
             <div class="GalleryImage">
-
                 <?php
                 foreach ($friends as $friend) {
-//                    echo "<a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a>";
-
-//                    echo '<a target="_blank" href="klematis_big.htm">';
-
-                    echo' <img src="http://fellowshipofminds.files.wordpress.com/2012/04/mickey-mouse-mickey-mouse-29454673-1024-768.jpg" alt="Klematis" width="110" height="90">
-                </a>';
+                    echo '<img src="' . $base . "/" . $uploads . "/" . $friend['image_name'] . '"alt="Klematis" width="110" height="90">';
                     echo "<div class='GalleryCaption'><a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . $friend['friend_first_name'] . "</a></div>";
-
-//                    echo' <div class="GalleryCaption">Person Name</div>';
                 }
                 ?>
             </div>
@@ -143,12 +135,11 @@
     </div>
 
 
-    <div class="wall fTop">
+    <div class="wall fTop" id="wall">
         <h1> Post Something! </h1>
         <hr>
         <form id="Wall" name="Wall">
             <input type="hidden" name='id' id='id' value=<?php echo "" . $id . "" ?> />
-            <input type="hidden" name="path" id="path"  value=<?php echo "" . $base . "/index.php/profile"; ?> />
             <input type="hidden" name='fid' id='fid' value=<?php echo "" . $id . "" ?> />
             <input type="text" id="post" name="post"/></br>
             <input type="button" class="btn" id="buttonPost" value="Post" />
@@ -177,8 +168,7 @@
 
 </div>
 
-</div>
-
 
 <div class="clearfix"></div>
 <hr>
+s

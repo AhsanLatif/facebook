@@ -5,10 +5,12 @@
     </div>
     <div class="modal-body">
         <div class="GalleryImage">
-            <a target="_blank" href="klematis_big.htm">
-                <img src="http://fellowshipofminds.files.wordpress.com/2012/04/mickey-mouse-mickey-mouse-29454673-1024-768.jpg" alt="Klematis" width="110" height="90">
-            </a>
-            <div class="GalleryCaption">Person's Name</div>
+            <?php
+            foreach ($mutualfriends as $friend1) {
+                echo '<img src="' . $base . "/" . $uploads . "/" . $friend1['image_name'] . '"alt="Klematis" width="110" height="90">';
+                echo "<div class='GalleryCaption'><a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend1['friend_id'] . ">" . $friend1['friend_first_name'] . "</a></div>";
+            }
+            ?>
         </div>
 
     </div>
@@ -39,13 +41,12 @@
                 <?php
                 if (isset($reqaccept)) {
                     echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/acceptRequest?fid=" . $fid . "> Accept Request </a>";
-//                    echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/ignoreRequest?fid=" . $fid . "> Ignore Request </a>";
-                
+                    echo "<a  id='addFrendButton' class='btn btn-primary link12' href=" . $base . "/index.php/friends/ignoreRequest?fid=" . $fid . "> Ignore Request </a>";
                 } else if (isset($friend)) {
                     echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/deleteFriend?fid=" . $fid . "> Delete Friend </a>";
                 } else if (isset($reqsent)) {
                     echo "<a  id='addFrendButton' class='btn btn-primary link' href='#'> Request Pending </a>";
-                } else if (isset($fid)) {
+                } else if (isset($abc)) {
                     echo "<a  id='addFrendButton' class='btn btn-primary link' href=" . $base . "/index.php/friends/addFriend?fid=" . $fid . "> Add Friend </a>";
                 }
                 ?>
@@ -81,10 +82,5 @@
     </div>
 </div>
 </div>
-<div class="clearfix"></div>
-<hr>
-<br>
-
-
 <div class="clearfix"></div>
 <hr>
