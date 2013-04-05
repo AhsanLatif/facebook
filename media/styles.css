@@ -122,7 +122,7 @@ width:557px;
 bottom:40px;
 left:10%;
 }
-}
+
 #picturePreview
 {
 background-color:black;
@@ -289,13 +289,21 @@ height:135px;
 width:100%;
 background-color:white;
 }
-
+#pictureControl
+{
+position:relative;
+left:10px;
+top:200px;
+z-index:2;
+display:none;
+}
 #coverPhoto
 {
 position:relative;
 float:top;
 width:70%;
 height:300px;
+min-height:300px;
 left:13.5%;
 
 }
@@ -330,7 +338,9 @@ border-color:gray;
 border-style:inset;
 border-width:2px;
 width:70%;
-height:700px;
+height:auto;
+min-height:700px;
+
 -webkit-border-radius:32px;
 -moz-border-radius:32px;
 border-radius:32px;
@@ -349,7 +359,8 @@ margin-top:1%;
 margin-left:13%;
 padding:10 10 10 10;
 width:70%;
-height:1000px;
+height:auto;
+min-height:1000px;
 }
 .profileInfo
 {
@@ -369,15 +380,16 @@ color:#223D86;
 {
 position:relative;
 left:40%;
-top:20%;
+
 }
 .profileOptions img
 {
 border-color:black;
--moz-border-radius: 100%;
-border-radius:100%;
--webkit-border-radius: 100%;
 
+}
+.profileOptions label
+{
+left:-50;
 }
 
 #PasswordRecoveryBox
@@ -427,4 +439,151 @@ height:100px;
 {
 width:200px;
 height:200px;
+}
+#frndpropic
+{
+width:200px;
+height:200px;
+}
+#searchProfileHead
+{
+position:relative;
+float:left;
+right:70%;
+top:-10;
+}
+#searchProfileHead input
+{
+height:30px;
+}
+#searchButton
+{
+position:relative;
+float:left;
+float:top;
+width:20px;
+height:30px;
+bottom:50%;
+z-index:30;
+left:20%;
+top:-30;
+}
+#pictureChanger
+{
+display:none;
+position:relative;
+/*right:10px;*/
+top:210px;
+}
+#logOut
+{
+position:relative;
+float:left;
+right:-150px;
+bottom:90;
+}
+
+#notifications
+{
+
+top:6px;
+right:400%;
+}
+#notifications button
+{
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+border-radius:5px;
+padding: 2 2 2 2;
+color:white;
+background-color:gray;
+border-width:1px;
+border-color:white;
+border-style:solid;
+width:15px;
+}
+
+#searchPageGallery
+{
+width:100%;
+
+}
+#addFriendButton
+{
+position:relative;
+float:top;
+top:-60;
+left:80;
+}
+.postWall
+{
+width:500px;
+height:50px;
+background-color:#CCCCFF;
+color:#000033;
+border-width:2px;
+border-color:black;
+border-style:groove;
+}
+/*Gallery reference : http://www.w3schools.com/css/css_image_gallery.asp */
+
+.GalleryImage
+  {
+ 
+  border:1px solid #0000ff;
+  height:100;
+  width:100;
+  float:left;
+  margin-right:10px;
+  margin-top:30px;
+
+  }
+.GalleryImage img
+  {
+ padding-left:0;
+  height:100%;
+  width:100%;
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  }
+.GalleryImage a:hover img
+  {
+  border:1px solid #0000ff;
+  }
+.GalleryCaption
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+  #frendIcon
+  {
+ position:relative;
+bottom:33;
+left:-20;
+ }
+ #addFrendButton
+ {
+position:relative;
+float:top;
+top:50px;
+left:-400;
+ }
+#pendingRequests
+{
+
+top:32px;
+right:420%;
+height:auto;
+}
+#pendingRequests img
+{
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+border-radius:5px;
+color:white;
+width:30px;
+height:20px;
 }
