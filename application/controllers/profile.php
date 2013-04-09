@@ -55,18 +55,19 @@ class profile extends CI_Controller {
     }
 		public function SearchFriends(){
 		
+		
 			$query = $_POST['query'];
 					if ($query == "") {
 						echo "nada";
 					}
 					$id=$this->session->userdata('id');
+			
 				
 		$from="user_friends";
 			   
 		$resource = $this->main_model->searchF($query,$from,$id);
 			    
       echo json_encode($resource);
-
 	}
 		public function SearchMutualFriends(){
 		

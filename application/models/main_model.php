@@ -499,6 +499,8 @@ class Main_model extends CI_Model {
 				{return $query->result_array();}
 				else{
 			return "nada";}
+			
+			
 	}
 	
 	public function searchMF($name,$from,$of,$otherOf)
@@ -543,7 +545,12 @@ class Main_model extends CI_Model {
             return $query->result_array();
         return "0";
     }
-
+	//add newsfeed post
+	public function addPost($id, $content, $link, $type)
+	{
+		  $data = array('user_id' => $id, 'content' => $content, 'link' => $link, 'type' => $type);
+        $this->db->insert('post', $data);
+	}
 }
 
 ?>

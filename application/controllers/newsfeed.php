@@ -29,7 +29,8 @@ echo $e . '<br>';*/
 	}
 	public function uploadPhoto()
 	{
-	     $config['upload_path'] = './uploads/';
+		$text=$_POST['PicText'];
+	    $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '10000';
         $config['max_width'] = '10240';
@@ -38,6 +39,14 @@ echo $e . '<br>';*/
         $this->load->library('upload', $config);
         $this->upload->do_upload();
         $imgdata = $this->upload->data();
+		$filename = $imgdata['file_name'];
+		$this->addPost($text,$filename,'1');
+	}
+	
+	public function addPost($content, $link, $type)
+	{
+		$id=$this->session->userdata('id');
+		$this->main_model->addPost($id,$content,$link,$type);
 	}
 	
 }
