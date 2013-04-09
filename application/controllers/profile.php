@@ -8,7 +8,7 @@ class profile extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('session');
     }
-
+	
     public function filteredSearch() {
         $i = 0;
         if (isset($_POST['fname']) && $_POST['fname'] != "") {

@@ -587,3 +587,20 @@ color:white;
 width:30px;
 height:20px;
 }
+#dropFiles
+{
+border-style:solid;
+border-color:black;
+border-width:1px;
+width:30%;
+height:10%;
+}
+.aPost
+{
+position:relative;
+float:top;
+}
+.aPost img
+{
+float:left;
+}

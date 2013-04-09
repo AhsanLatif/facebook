@@ -330,7 +330,23 @@ $(document).ready(function() {
  );
    
   //File Drag and Drop
- 
+Dropzone.options.dropFiles = {
+  paramName: "userfile", // The name that will be used to transfer the file
+  maxFilesize: 4,
+dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
+  accept: function(file, done) {
+    if (file.name == "justinbieber.jpg") {
+      done("Naha, you don't.");
+    }
+    else { done(); }
+  }
+};
+$('#doneDragging').on('click',function(){
+
+$('#doneDragging').text('Some Remove Text');
+$('#dropFiles').html("");
+});
+$('#normal-toggle-button').toggleButtons();
  
 });
 

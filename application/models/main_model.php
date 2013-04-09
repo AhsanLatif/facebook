@@ -489,16 +489,16 @@ class Main_model extends CI_Model {
 		
 			
 			$this->db->select('*');
-			$this->db->from($from);
+			$this->db->from("user_friends");
 			$this->db->where(array('user_id'=>$id, 'friend_first_name'=>$name));
 			$this->db->or_where(array('friend_last_name'=>$name, 'user_id'=>$id));
             $this->db->join('user_images', 'user_images.user_id = user_friends.friend_id');
 			$query=$this->db->get();
 		
 			if($query->num_rows>0)
-				return $query->result_array();
-			return "nada";
-			
+				{return $query->result_array();}
+				else{
+			return "nada";}
 	}
 	
 	public function searchMF($name,$from,$of,$otherOf)
