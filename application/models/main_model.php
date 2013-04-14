@@ -551,6 +551,15 @@ class Main_model extends CI_Model {
 		  $data = array('user_id' => $id, 'content' => $content, 'link' => $link, 'type' => $type);
         $this->db->insert('post', $data);
 	}
+	public function getPosts($id)
+	{
+		$this->db->select('*');
+		$this->db->from('post');
+		$this->db->where(array('user_id'=>$id));
+		$this->db->join('user_sign_up','user_sign_up.id=user_id');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
 }
 
 ?>

@@ -186,8 +186,8 @@ $(document).ready(function() {
     $(function()
     {
         var id=$('#currid').val();
-        var base=$('#path').val();
-        var path=$('#path').val()+"/getNotification";
+       
+        var path=basePath+"profile/getNotification";
         $.ajax({
             type:'post',
             url:path,
@@ -219,8 +219,8 @@ $(document).ready(function() {
 
     setInterval(function() {
         var id=$('#currid').val();
-        var base=$('#path').val();
-        var path=$('#path').val()+"/getNotification";
+       
+        var path=basePath+"/profile/getNotification";
         $.ajax({
             type:'post',
             url:path,
@@ -254,30 +254,31 @@ $(document).ready(function() {
  
  {
 
- 
+
  var query=$('#searchFrend').val();
+
  var path=$('#path').val()+"/SearchFriends";
- 
+
  $.ajax({
             type:'post',
             url:path,
-			data:{'query':query},
+	    data:{'query':query},
             success:function(data)
             {
-		
+		alert(data);
                 if(data!="nada")
                 {
                     var obj=jQuery.parseJSON(data);
-                    var html="";
-					alert(obj.length);
+                    var Vhtml="";
+					
                     for(var i =0;i <obj.length-1;i++)
-              {
-					html=html+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
+                    {
+					Vhtml=Vhtml+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
 					"<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
 					
                      
                     }
-                    $('#randomDiv').html(html);
+                    $('#randomDiv').html(Vhtml);
 
                 }
 
@@ -324,6 +325,8 @@ $(document).ready(function() {
 
             }
         });
+		
+		
  
  }
  
@@ -334,19 +337,74 @@ Dropzone.options.dropFiles = {
   paramName: "userfile", // The name that will be used to transfer the file
   maxFilesize: 4,
 dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
-  accept: function(file, done) {
-    if (file.name == "justinbieber.jpg") {
-      done("Naha, you don't.");
-    }
-    else { done(); }
+  complete: function(file, done) {
+    
+	this.removeFile(file);
+	}
+	
+    
+	
   }
-};
+;
 $('#doneDragging').on('click',function(){
 
 $('#doneDragging').text('Some Remove Text');
-$('#dropFiles').html("");
+$('#dropFiles').html("<label>Caption </label><input type='text' name='PicText' />");
 });
-$('#normal-toggle-button').toggleButtons();
+
+
+
+//$('#normal-toggle-button').toggleButtons();
+ //get News feed
+ 
+$(function(){
+
+
+var path=basePath+"newsfeed/getPosts";
+
+    $.ajax({ url: path, success: function(data){
+			  var obj=jQuery.parseJSON(data);
+			 
+			  var html="";
+			  
+		      for(var i =0;i <obj.length;i++)
+              {
+			  if(obj[i].type=='1')
+				{
+				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
+              }
+			$('#theWall').html(html);
+    } });
+	});
+ 
+ //long polling for newsfeed
+
+setInterval(function(){
+
+
+var path=basePath+"newsfeed/getPosts";
+
+    $.ajax({ url: path, success: function(data){
+			  var obj=jQuery.parseJSON(data);
+			 
+			  var html="";
+			  
+		      for(var i =0;i <obj.length;i++)
+              {
+			  if(obj[i].type=='1')
+				{
+				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
+              }
+			$('#theWall').html(html);
+    } });
+	}, 20000);
+$('.clickedImg').live('click',function()
+{
+
+$('#picLargeView').attr('src', this.src);
+
+$('#viewLargePic').modal('show');
+});
  
 });
 

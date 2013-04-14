@@ -604,3 +604,22 @@ float:top;
 {
 float:left;
 }
+.NewsFeedImg 
+{
+width:110;
+height:90;
+border-style:solid;
+border-width:2px;
+border-color:gray;
+}
+.NewsFeedImg img
+{
+width:110;
+height:90;
+cursor:pointer;
+
+}
+#theWall
+{
+padding-left:5%;
+}

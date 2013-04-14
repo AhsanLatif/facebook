@@ -354,6 +354,7 @@ $data['myID'] = $id;
 		 $this->main_model->removeNotification($id);
 		 $this->index();
 	}
+	
 
 }
 

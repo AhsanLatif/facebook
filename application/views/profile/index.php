@@ -196,4 +196,3 @@ if(isset($friends))
 
 <div class="clearfix"></div>
 <hr>
-s
