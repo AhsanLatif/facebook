@@ -1,6 +1,7 @@
 //Jquery Calls
 $(document).ready(function() {
   var basePath="http://localhost/webProject/index.php/";
+  var abc;
     $( ".link" ).on( "click", function(e) {
         e.preventDefault();
         var link = $(".link" ).attr('href');
@@ -340,6 +341,8 @@ dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',
   complete: function(file, done) {
     
 	this.removeFile(file);
+	$('#PicText').val(" ");
+	
 	}
 	
     
@@ -356,51 +359,57 @@ $('#dropFiles').html("<label>Caption </label><input type='text' name='PicText' /
 
 //$('#normal-toggle-button').toggleButtons();
  //get News feed
- 
+ /*
 $(function(){
 
+var idFrom=$('#currId').val();
+var path=basePath+"newsfeed/getPosts/"+idFrom;
 
-var path=basePath+"newsfeed/getPosts";
-
-    $.ajax({ url: path, success: function(data){
+    $.ajax({ url: path,data:{'lastId': idFrom}, type:'post', success: function(data){
 			  var obj=jQuery.parseJSON(data);
 			 
 			  var html="";
-			  
+			   $('#currId').val(obj[0].post_id);   
 		      for(var i =0;i <obj.length;i++)
               {
 			  if(obj[i].type=='1')
 				{
 				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
-              }
+            
+          }
+			         
 			$('#theWall').html(html);
     } });
-	});
+	});*/
  
  //long polling for newsfeed
 
-setInterval(function(){
+(function poll(){
 
+var idFrom=$('#currId').val();
+var path=basePath+"newsfeed/getPosts/"+idFrom;
 
-var path=basePath+"newsfeed/getPosts";
-
-    $.ajax({ url: path, success: function(data){
+    $.ajax({ url: path, type:'post',  success: function(data){
 			  var obj=jQuery.parseJSON(data);
-			 
+			 var ran;
 			  var html="";
-			  
+			   var a=obj[0].post_id;
 		      for(var i =0;i <obj.length;i++)
               {
 			  if(obj[i].type=='1')
 				{
 				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
-              }
-			$('#theWall').html(html);
-    } });
-	}, 20000);
+                         
+}
+
+			$(html).insertAfter('#newPostAdder');
+			$('#currId').val(a);  
+    } , complete: poll, timeout: 4000000 });
+})();
+
 $('.clickedImg').live('click',function()
 {
-
+alert($('#currId').val());
 $('#picLargeView').attr('src', this.src);
 
 $('#viewLargePic').modal('show');

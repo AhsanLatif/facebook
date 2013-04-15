@@ -551,14 +551,32 @@ class Main_model extends CI_Model {
 		  $data = array('user_id' => $id, 'content' => $content, 'link' => $link, 'type' => $type);
         $this->db->insert('post', $data);
 	}
-	public function getPosts($id)
+	public function getPosts($id,$iter)
 	{
+		$this->db->select('friend_id');
+		$this->db->from('user_friends');
+		$this->db->where('user_id',$id);
+		$ids=$this->db->get()->result_array();
+		$i=0;
+		foreach($ids as $f):
+		{
+		$arr[$i]= $f['friend_id'];
+		$i++;
+		}endforeach;
+		$name='user_id';
 		$this->db->select('*');
 		$this->db->from('post');
-		$this->db->where(array('user_id'=>$id));
+		$this->db->where('post_id >',$iter);
+		$this->db->where_in($name,$arr);
+		$this->db->or_where('user_id', $id); 
+		 $this->db->order_by("post_id", "desc");
 		$this->db->join('user_sign_up','user_sign_up.id=user_id');
+
 		$query=$this->db->get();
-		return $query->result_array();
+	return $query->result_array();
+		
+
+		
 	}
 }
 

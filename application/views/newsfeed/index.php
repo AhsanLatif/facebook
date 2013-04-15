@@ -34,7 +34,7 @@
 					<label> Drop Photos here or click to upload </label>
 					  <form action=<?php echo "".$base."/index.php/newsfeed/uploadPhoto"; ?> class="dropzone"id="dropFiles">
 					  
-					 <label>Caption </label><input type="text" name="PicText" />
+					 <label>Caption </label><input type="text" id='PicText' placeholder="Add a caption before you drop your photo!" name="PicText" />
 					</form>
 					</div>
 					<div id="normal-toggle-button">
@@ -45,9 +45,10 @@
 			
    </div>
    <hr>
-
+<input type="hidden" id="currId" value="0" />
    <div id="theWall">
-
+   
+	<div id="newPostAdder" ></div>
    
    </div>
 		

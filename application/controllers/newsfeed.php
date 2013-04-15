@@ -48,10 +48,11 @@ echo $e . '<br>';*/
 		$id=$this->session->userdata('id');
 		$this->main_model->addPost($id,$content,$link,$type);
 	}
-	public function getPosts()
+	public function getPosts($iter=0)
 	{
 		$id=$this->session->userdata('id');
-		echo json_encode($this->main_model->getPosts($id));
+		
+		echo json_encode($this->main_model->getPosts($id,$iter));
 	}
 	
 }

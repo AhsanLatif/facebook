@@ -4,7 +4,7 @@
 
 
 
-
+<meta http-equiv="cache-control" content="no-cache" />
 
         <link href=<?php echo "" . $base . "/media/bootstrap.min.css" ?> rel="stylesheet" media="all">
         <link href=<?php echo "" . $base . "/media/datepicker.css" ?> rel="stylesheet" type="text/css" media="all"/>
