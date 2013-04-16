@@ -566,10 +566,11 @@ class Main_model extends CI_Model {
 		$name='user_id';
 		$this->db->select('*');
 		$this->db->from('post');
-		$this->db->where('post_id >',$iter);
+		
 		$this->db->where_in($name,$arr);
+	$this->db->having('post_id >',$iter);
 		$this->db->or_where('user_id', $id); 
-		 $this->db->order_by("post_id", "desc");
+		 
 		$this->db->join('user_sign_up','user_sign_up.id=user_id');
 
 		$query=$this->db->get();
