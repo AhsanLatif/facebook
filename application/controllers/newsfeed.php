@@ -37,10 +37,10 @@ echo $e . '<br>';*/
         $config['max_height'] = '7680';
 
         $this->load->library('upload', $config);
-        $this->upload->do_upload();
+       if( $this->upload->do_upload()){
         $imgdata = $this->upload->data();
 		$filename = $imgdata['file_name'];
-		$this->addPost($text,$filename,'1');
+		$this->addPost($text,$filename,'1');}
 	}
 	
 	public function addPost($content, $link, $type)
