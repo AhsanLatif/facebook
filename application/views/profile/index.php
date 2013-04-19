@@ -150,8 +150,18 @@ if(isset($friends))
         <span class="profileInfo well pull-left"><?php echo "<a data-toggle='modal' data-target='#changeInfo'><span id='profileInfoTextWrapper'class='profileInfoTextWrapper well pull-left'><p class='profileInfoText'><h3>" . $name . "</h3>Birthday:" . $bday . "<br> School:" . $school . "<br>University" . $university . "<br>Employer:" . $employer . "</p></span></a>" ?>
 
           
-			<div class="profileOptions">
-                <img class="fLeft" id="frendIcon" data-toggle="modal" data-target="#viewFriends" src=<?php echo "" . $base . "/" . $images . "/friends-icon-large.gif"; ?> />
+			<div id="frendIcon" class="profileOptions">
+			<div class="btn-group">
+  <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+    Options
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li ><a data-toggle="modal" data-target="#viewFriends">View Friends </a></li>
+	    <li ><a href=<?php echo "".$base."/index.php/profile/goToPage/newsfeed";?>>View Newsfeed </a></li>
+		<li> <a href=<?php echo "".$base."/index.php/profile/logout"; ?>> Logout </a> </li>
+  </ul>
+</div>
                 </br>
             </div>
         </span><br>
@@ -160,35 +170,7 @@ if(isset($friends))
     </div>
 
 
-    <div class="wall fTop" id="wall">
-        <h1> Post Something! </h1>
-        <hr>
-        <form id="Wall" name="Wall">
-            <input type="hidden" name='id' id='id' value=<?php echo "" . $id . "" ?> />
-            <input type="hidden" name='fid' id='fid' value=<?php echo "" . $id . "" ?> />
-            <input type="text" id="post" name="post"/></br>
-            <input type="button" class="btn" id="buttonPost" value="Post" />
-        </form>
-        <div id="thePosts">
-            <div class="helper" >
-            </div>
-            <?php
-            $i = 0;
-            if (isset($wallPost) && $wallPost != 0) {
-                foreach ($wallPost as $post) {
-                    echo "<div class='postWall'> <p>" . $post['first_name'] . " " . $post['last_name'] . ": " . $post['post'] . "</p></div>";
-                    $i++;
-                }
-            }
-            ?>
-        </div>
-        <input type="hidden" id="currPost" value=<?php echo $posted ?> />
-
-
-        <div class="nothing">
-        </div>
-    </div>
-
+        
 
 
 </div>

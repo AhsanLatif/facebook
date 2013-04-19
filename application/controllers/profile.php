@@ -356,6 +356,13 @@ $data['myID'] = $id;
 		 $this->main_model->removeNotification($id);
 		 $this->index();
 	}
+		public function goToPage($page)
+	{
+		if($page=="newsfeed")
+		{
+			redirect('newsfeed/index');
+		}
+	}
 	
 
 }

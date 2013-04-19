@@ -360,7 +360,7 @@ margin-left:13%;
 padding:10 10 10 10;
 width:70%;
 height:auto;
-min-height:1000px;
+min-height:500px;
 }
 .profileInfo
 {
@@ -438,7 +438,7 @@ height:100px;
 #propic
 {
 width:200px;
-height:200px;
+height:240px;
 }
 #frndpropic
 {
@@ -473,7 +473,7 @@ top:-30;
 display:none;
 position:relative;
 /*right:10px;*/
-top:210px;
+top:269px;
 }
 #logOut
 {
@@ -561,8 +561,7 @@ border-style:groove;
   #frendIcon
   {
  position:relative;
-bottom:33;
-left:-20;
+
  }
  #addFrendButton
  {
