@@ -26,6 +26,7 @@
   <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
 						<input type="text" name="statusPost" id="statusPost" />
+						<input type="submit" class="btn" value="post" id="simplePost" />
 					</div>
 				 
                     <div class="tab-pane" id="tab2">

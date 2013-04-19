@@ -338,8 +338,7 @@ Dropzone.options.dropFiles = {
   paramName: "userfile", // The name that will be used to transfer the file
   maxFilesize: 4,
 dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
- 
- accept: function(file, done) {
+accept: function(file, done) {
   var ext = file.name.split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1)
 		{
@@ -397,70 +396,95 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
 	});*/
  
  //long polling for newsfeed
-
+var idFrom=0;
 (function poll(){
 
-var idFrom=$('#currId').val();
+idFrom=$('#currId').val();
+
 var path=basePath+"newsfeed/getPosts/"+idFrom;
 
-    $.ajax({ url: path, type:'post',  success: function(data){
+    $.ajax({ url: path,  success: function(data){
 			  var obj=jQuery.parseJSON(data);
-			 var ran;
+			 var ran=0;
 			  var html="";
-			   var a=obj[0].post_id;
+						  
 		      for(var i =0;i <obj.length;i++)
               {
+  
 			  if(obj[i].type=='1')
 				{
-				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
-                         
-}
+				html='<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>'; 
+					 
 
-<<<<<<< HEAD
-			$(html).insertAfter('#newPostAdder');
-			$('#currId').val(a);  
-    } , complete: poll, timeout: 4000000 });
+				$(html).insertAfter('#newPostAdder');	
+				}
+			 else if(obj[i].type=='2')
+				{
+				html="<p>"+obj[i].content+"</p>";
+			/*	obj[i].type="";
+				var fName=obj[i].first_name;
+				var content=obj[i].content;
+				var id=obj[i].post_id;
+						var newPath=basePath+"newsfeed/getImage/?url="+obj[i].link;
+						$.ajax({
+						url:newPath,
+						success:function(src)
+						{
+						if(id!=""){
+							html='<u>'+fName+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+src+'"  alt="myImage"  /></div>'+"<div style='text-align:center' class='GalleryCaption'>"+content+'</div><hr><br><br>'; 
+							alert(html);
+							
+							
+							
+							if($('#currId').val()<=id)			 
+	{$('#currId').val(id);}
+							id="";
+						fName="";
+						content="";}
+							
+						}
+					
+						
+						
+						, timeout:70000});
+						
+				*/		
+				$(html).insertAfter('#newPostAdder');	
+				}			 
+	
+					ran++;
+                         
+			  }
+
+			
+				{$('#currId').val(obj[i].post_id);}
+    } , complete: poll, timeout: 10000000 });
 })();
 
 $('.clickedImg').live('click',function()
 {
-alert($('#currId').val());
+
 $('#picLargeView').attr('src', this.src);
 
 $('#viewLargePic').modal('show');
 });
-=======
-); 
-
-
-$('#pro').mouseover(
-function()
+ 
+ 
+$('#simplePost').on('click',function()
 {
-
-$('#pictureChanger').css('display','block');
-$('#pictureChanger').css('z-index','2');
-}
-
-
-).mouseout(
-
-function()
+var content=$('#statusPost').val();
+var path=basePath+"newsfeed/postEvaluate";
+if(content!="")
 {
-$('#pictureChanger').css('display','none');
-$('#pictureChanger').css('z-index','1');
-
+    $.ajax({ url: path, 
+			data:{'content':content},
+			type:"post"			 	
+			
+			 });
 }
-
-);
-
- $('#profileInfoTextWrapper').tooltip({
-    title: 'Click to edit!',
-	placement: 'bottom'
-  });
->>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
+}); 
  
 });
-
 
 
 //Reference: w3schools.com
@@ -485,6 +509,8 @@ function getCookie(c_name)
         {
             return unescape(y);
         }
+		else
+		return false;
     }
 	
 }

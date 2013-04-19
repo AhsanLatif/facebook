@@ -169,7 +169,6 @@ class Main_model extends CI_Model {
         $rows = $query->num_rows();
         return $rows;
     }
-<<<<<<< HEAD
 
     public function displayPeople_model() {
 
@@ -579,21 +578,6 @@ class Main_model extends CI_Model {
 		
 
 		
-=======
-		public function updateInfo($data)
-	{
-	 $this->db->where('user_id', $data['user_id']);
-           if( $this->db->update('user_info', $data))
-		   return 1;
-		   return -1;
-	}
-	public function updateBirthday($data)
-	{
-	 $this->db->where('id', $data['id']);
-           if( $this->db->update('user_sign_up', array('birthday'=>$data['birthday'])))
-		   return 1;
-		   return -1;
->>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
 	}
 }
 
