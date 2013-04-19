@@ -338,17 +338,31 @@ $(document).ready(function() {
  
         );
    
-    //File Drag and Drop
-    Dropzone.options.dropFiles = {
-        paramName: "userfile", // The name that will be used to transfer the file
-        maxFilesize: 4,
-        dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
-        complete: function(file, done) {
+  //File Drag and Drop
+Dropzone.options.dropFiles = {
+  paramName: "userfile", // The name that will be used to transfer the file
+  maxFilesize: 4,
+dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
+ 
+ accept: function(file, done) {
+  var ext = file.name.split('.').pop().toLowerCase();
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1)
+		{
+		done("wrong file format");
+		}
+		else
+		{
+		done();
+		}
+	},
+  complete: function(file, done) {
     
-            this.removeFile(file);
-            $('#PicText').val(" ");
+	//this.removeFile(file);
 	
-        }
+	 $('#PicText').attr("placeholder", "Enter a caption before you drop");
+
+	
+	}
 	
     
 	
