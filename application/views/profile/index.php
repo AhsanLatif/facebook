@@ -170,16 +170,21 @@ if(isset($friends))
     </div>
 
 <h3> <u>My Friends</u> </h3>
-<div class="hoverbox">
+<ul class="hoverbox">
 
 		
       
                 <?php
+				$i=0;
                 foreach ($friends as $friend) {
-			
-                    echo"<li> <a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . "<img src='" . $base . "/" . $uploads . "/" . $friend['image_name'] . "' alt='nothing' width='110' height='90' /></a>";
+				$i++;
+                    echo"<li> <a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . "<img src='" . $base . "/" . $uploads . "/" . $friend['image_name'] . "' alt='nothing' width='110' height='90' />"."<img src='" . $base . "/" . $uploads . "/" . $friend['image_name'] . "' alt='nothing' width='110' height='90' class='preview'/>"."</a>";
                     echo "<div class='GalleryCaption'>".$friend['friend_first_name'] . "</div></li>";
              
+				}
+				if($i==0)
+				{
+					echo "you dont have any friends! :(";
 				}
                 ?>
 			
@@ -187,7 +192,9 @@ if(isset($friends))
             
 		
 
-</div>
+</ul>
+        
+
  
         
 

@@ -73,35 +73,36 @@ if(isset($mutualfriends))
 	</div>
         </span>
     </div>
-</div>
+
 <br>
-<!--
-<div class="wall fTop">
-    <h1> Post Something! </h1>
-    <hr>
-    <form id="Wall" name="Wall">
-        <input type="hidden" name='id' id='id' value=<?php echo "" . $id . "" ?> /> 
-     
-        <input type="text" id="post" name="post"/></br>
-        <input type="button" class="btn" id="buttonPost" value="Post" />
-    </form>
-    <div id="thePosts">
-        <div class="helper" >
-        </div>
-    <?php
-        $i = 0;
-        if (isset($wallPost) && $wallPost != 0) {
-            foreach ($wallPost as $post) {
-                echo "<div class='postWall'> <p>" . $post['first_name'] . " " . $post['last_name'] . ": " . $post['post'] . "</p></div>";
-                $i++;
-            }
-        }
-        ?>
-    </div>
-    <div class="nothing">
-    </div>
+
+<h3> <u>Mutual Friends</u> </h3>
+<ul class="hoverbox">
+
+		
+      
+              <?php
+			  $i=0;
+            foreach ($mutualfriends as $friend1) {
+			$i++;
+               echo "<li>";
+                    echo" <a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend1['friend_id'] . ">" . "<img src='" . $base . "/" . $uploads . "/" . $friend1['image_name'] . "' alt='nothing' width='110' height='90'>"."<img src='" . $base . "/" . $uploads . "/" . $friend1['image_name'] . "' alt='nothing' width='110' height='90' class='preview'>"."</a>";
+                    echo "<div class='GalleryCaption'>".$friend1['friend_first_name'] . "</div>";
+                echo "</li>";
+				}
+				if($i==0)
+				{
+				echo "No Mutual Friends :(";
+				}
+            ?>
+			
+			
+            
+		
+
+</ul>
 </div>
-</div>
+
 <div class="clearfix"></div>
 <hr>
 -->
