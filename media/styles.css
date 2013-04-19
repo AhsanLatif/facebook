@@ -440,6 +440,7 @@ height:100px;
 width:200px;
 height:200px;
 }
+<<<<<<< HEAD
 #frndpropic
 {
 width:200px;
@@ -451,11 +452,19 @@ position:relative;
 float:left;
 right:70%;
 top:-10;
+=======
+#searchProfileHead
+{
+position:relative;
+right:70%;
+top:30px;
+>>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
 }
 #searchProfileHead input
 {
 height:30px;
 }
+<<<<<<< HEAD
 #searchButton
 {
 position:relative;
@@ -468,6 +477,9 @@ z-index:30;
 left:20%;
 top:-30;
 }
+=======
+
+>>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
 #pictureChanger
 {
 display:none;
@@ -478,6 +490,7 @@ top:210px;
 #logOut
 {
 position:relative;
+<<<<<<< HEAD
 float:left;
 right:-150px;
 bottom:90;
@@ -622,4 +635,8 @@ cursor:pointer;
 #theWall
 {
 padding-left:5%;
+=======
+right:-70px;
+top:-40px;
+>>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
 }

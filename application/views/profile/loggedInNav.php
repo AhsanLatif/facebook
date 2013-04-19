@@ -1,5 +1,6 @@
 
 <div id="loggedInNav">
+<<<<<<< HEAD
 
 <div  id="pendingRequests" class="dropdown">
   <img data-toggle="dropdown" src=<?php echo "" . $base . "/" . $images . "/friends-icon.gif" ?> />
@@ -51,5 +52,11 @@ if(isset($friends))
 
 <div id="clearfix"></div>
 <div id="logOut"><a href=<?php echo "".$base."/index.php/profile/logout"?>><img src=<?php echo "".$base."/".$images."/logout_button.gif" ?> class="fTop" /></a></div>
+=======
+<form class="navbar-search pull-left" method="post"id="searchProfileHead" action=<?php echo "".$base."/index.php/profile/Search"?>>
+  <input type="text" class="search-query" placeholder="Search"/>
+</form>
+<a class="btn" href=<?php echo "".$base."/index.php/profile/logout"?>> Log Out </a>
+>>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
 
 </div>

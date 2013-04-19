@@ -416,6 +416,7 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
                          
 }
 
+<<<<<<< HEAD
 			$(html).insertAfter('#newPostAdder');
 			$('#currId').val(a);  
     } , complete: poll, timeout: 4000000 });
@@ -428,8 +429,38 @@ $('#picLargeView').attr('src', this.src);
 
 $('#viewLargePic').modal('show');
 });
+=======
+); 
+
+
+$('#pro').mouseover(
+function()
+{
+
+$('#pictureChanger').css('display','block');
+$('#pictureChanger').css('z-index','2');
+}
+
+
+).mouseout(
+
+function()
+{
+$('#pictureChanger').css('display','none');
+$('#pictureChanger').css('z-index','1');
+
+}
+
+);
+
+ $('#profileInfoTextWrapper').tooltip({
+    title: 'Click to edit!',
+	placement: 'bottom'
+  });
+>>>>>>> 53bd49c7fa67249f938bbed8aaa8758c4a32ed5a
  
 });
+
 
 
 //Reference: w3schools.com
