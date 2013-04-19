@@ -1,12 +1,12 @@
 //Jquery Calls
 $(document).ready(function() {
-    var basePath="http://localhost/webProject/index.php/";
-    var abc;
+  var basePath="http://localhost/webProject/index.php/";
+  var abc;
     $( ".link" ).on( "click", function(e) {
         e.preventDefault();
         var link = $(".link" ).attr('href');
         //  alert(link);
-        $(".link12").remove();
+		$(".link12").remove();
         $.ajax({
             url: link,
             type: 'get',
@@ -251,100 +251,94 @@ $(document).ready(function() {
     }, 5000);
  
  
-    $('#searchFriends').on('click', function()
+ $('#searchFriends').on('click', function()
  
-    {
+ {
 
 
-            var query=$('#searchFrend').val();
+ var query=$('#searchFrend').val();
 
-            var path=$('#path').val()+"/SearchFriends";
+ var path=$('#path').val()+"/SearchFriends";
 
-            $.ajax({
-                type:'post',
-                url:path,
-                data:{
-                    'query':query
-                },
-                success:function(data)
+ $.ajax({
+            type:'post',
+            url:path,
+	    data:{'query':query},
+            success:function(data)
+            {
+		alert(data);
+                if(data!="nada")
                 {
-                    alert(data);
-                    if(data!="nada")
-                    {
-                        var obj=jQuery.parseJSON(data);
-                        var Vhtml="";
+                    var obj=jQuery.parseJSON(data);
+                    var Vhtml="";
 					
-                        for(var i =0;i <obj.length-1;i++)
-                        {
-                            Vhtml=Vhtml+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
-                            "<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
+                    for(var i =0;i <obj.length-1;i++)
+                    {
+					Vhtml=Vhtml+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
+					"<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
 					
                      
-                        }
-                        $('#randomDiv').html(Vhtml);
-
                     }
+                    $('#randomDiv').html(Vhtml);
 
                 }
-            });
+
+            }
+        });
  
-        }
+ }
  
-        );
+ );
    
 
 
-    $('#searchMutualFriends').on('click', function()
+ $('#searchMutualFriends').on('click', function()
  
-    {
+ {
 
  
-            var query=$('#searchMFrend').val();
-            var path=basePath+"/profile/SearchMutualFriends";
-            var fID=$('#myID').val();
+ var query=$('#searchMFrend').val();
+ var path=basePath+"/profile/SearchMutualFriends";
+ var fID=$('#myID').val();
  
-            $.ajax({
-                type:'post',
-                url:path,
-                data:{
-                    'query':query, 
-                    'frndID':fID
-                },
-                success:function(data)
-                {
+ $.ajax({
+            type:'post',
+            url:path,
+			data:{'query':query, 'frndID':fID},
+            success:function(data)
+            {
 		
-                    if(data!="nada")
-                    {
-                        var obj=jQuery.parseJSON(data);
-                        var html="";
+                if(data!="nada")
+                {
+                    var obj=jQuery.parseJSON(data);
+                    var html="";
 					
-                        for(var i =0;i <obj.length;i++)
-                        {
-                            html=html+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
-                            "<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
+                    for(var i =0;i <obj.length;i++)
+              {
+					html=html+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
+					"<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
 					
                      
-                        }
-                        $('#randomDivM').html(html);
-
                     }
+                    $('#randomDivM').html(html);
 
                 }
-            });
+
+            }
+        });
 		
 		
  
-        }
+ }
  
-        );
+ );
    
   //File Drag and Drop
 Dropzone.options.dropFiles = {
   paramName: "userfile", // The name that will be used to transfer the file
   maxFilesize: 4,
 dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',  
- 
- accept: function(file, done) {
+accept: function(file, done) {
   var ext = file.name.split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1)
 		{
@@ -366,19 +360,19 @@ dictDefaultMessage: 'Drop A Picture Here! or Click to Upload',
 	
     
 	
-    }
-    ;
-    $('#doneDragging').on('click',function(){
+  }
+;
+$('#doneDragging').on('click',function(){
 
-        $('#doneDragging').text('Some Remove Text');
-        $('#dropFiles').html("<label>Caption </label><input type='text' name='PicText' />");
-    });
+$('#doneDragging').text('Some Remove Text');
+$('#dropFiles').html("<label>Caption </label><input type='text' name='PicText' />");
+});
 
 
 
-    //$('#normal-toggle-button').toggleButtons();
-    //get News feed
-    /*
+//$('#normal-toggle-button').toggleButtons();
+ //get News feed
+ /*
 $(function(){
 
 var idFrom=$('#currId').val();
@@ -401,45 +395,94 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
     } });
 	});*/
  
-    //long polling for newsfeed
+ //long polling for newsfeed
+var idFrom=0;
+(function poll(){
 
-    (function poll(){
+idFrom=$('#currId').val();
 
-        var idFrom=$('#currId').val();
-        var path=basePath+"newsfeed/getPosts/"+idFrom;
+var path=basePath+"newsfeed/getPosts/"+idFrom;
 
-        $.ajax({
-            url: path, 
-            type:'post',  
-            success: function(data){
-                var obj=jQuery.parseJSON(data);
-                var ran;
-                var html="";
-                var a=obj[0].post_id;
-                for(var i =0;i <obj.length;i++)
-                {
-                    if(obj[i].type=='1')
-                    {
-                        html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';
-                    }    
+    $.ajax({ url: path,  success: function(data){
+			  var obj=jQuery.parseJSON(data);
+			 var ran=0;
+			  var html="";
+						  
+		      for(var i =0;i <obj.length;i++)
+              {
+  
+			  if(obj[i].type=='1')
+				{
+				html='<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>'; 
+					 
+
+				$(html).insertAfter('#newPostAdder');	
+				}
+			 else if(obj[i].type=='2')
+				{
+				html="<p>"+obj[i].content+"</p>";
+			/*	obj[i].type="";
+				var fName=obj[i].first_name;
+				var content=obj[i].content;
+				var id=obj[i].post_id;
+						var newPath=basePath+"newsfeed/getImage/?url="+obj[i].link;
+						$.ajax({
+						url:newPath,
+						success:function(src)
+						{
+						if(id!=""){
+							html='<u>'+fName+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+src+'"  alt="myImage"  /></div>'+"<div style='text-align:center' class='GalleryCaption'>"+content+'</div><hr><br><br>'; 
+							alert(html);
+							
+							
+							
+							if($('#currId').val()<=id)			 
+	{$('#currId').val(id);}
+							id="";
+						fName="";
+						content="";}
+							
+						}
+					
+						
+						
+						, timeout:70000});
+						
+				*/		
+				$(html).insertAfter('#newPostAdder');	
+				}			 
+	
+					ran++;
                          
-                }
+			  }
 
-                $(html).insertAfter('#newPostAdder');
-                $('#currId').val(a);  
-            } , 
-            complete: poll, 
-            timeout: 4000000
-        });
-    })();
+			
+				{$('#currId').val(obj[i].post_id);}
+    } , complete: poll, timeout: 10000000 });
+})();
 
-    $('.clickedImg').live('click',function()
-    {
-        alert($('#currId').val());
-        $('#picLargeView').attr('src', this.src);
+$('.clickedImg').live('click',function()
+{
 
-        $('#viewLargePic').modal('show');
-    });
+$('#picLargeView').attr('src', this.src);
+
+$('#viewLargePic').modal('show');
+});
+ 
+ 
+$('#simplePost').on('click',function()
+{
+var content=$('#statusPost').val();
+var path=basePath+"newsfeed/postEvaluate";
+if(content!="")
+{
+    $.ajax({ url: path, 
+			data:{'content':content},
+			type:"post"			 	
+			
+			 });
+}
+}); 
  
 });
 
@@ -466,6 +509,8 @@ function getCookie(c_name)
         {
             return unescape(y);
         }
+		else
+		return false;
     }
 	
 }

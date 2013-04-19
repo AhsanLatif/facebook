@@ -79,7 +79,7 @@ if(isset($friends))
 
     <div id="pictureChange" class="modal hide fade in" style="display: none; ">
         <div class="modal-header">
-            <a class="close" data-dismiss="modal">Ã—</a>
+            <a class="close" data-dismiss="modal">×</a>
             <h3>Profile Pic Panel</h3>
         </div>
         <div class="modal-body">
