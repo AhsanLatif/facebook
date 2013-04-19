@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/webProject';
+$config['base_url']	= 'http://localhost/facebook';
 $config['images']='media/images';
 /*
 |--------------------------------------------------------------------------
