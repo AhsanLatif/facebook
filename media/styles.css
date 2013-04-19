@@ -150,7 +150,8 @@ max-height:83px;
 {
 position:relative;
 float:left;
-padding-left:184px;
+margin-left:184px;
+z-index:1;
 }
 #submitButtonlogin
 {
@@ -176,11 +177,7 @@ float:right;
 margin-right:173px;
 bottom:80px;
 }
-#loggedInNav a
-{
-position:relative;
-top:25px;
-}
+
 #loginForm  table
 {
 color:white;
@@ -450,7 +447,7 @@ height:240px;
 position:relative;
 float:left;
 right:70%;
-top:-10;
+top:-20;
 }
 #searchProfileHead input
 {
@@ -463,10 +460,9 @@ float:left;
 float:top;
 width:20px;
 height:30px;
-bottom:50%;
 z-index:30;
 left:20%;
-top:-30;
+top:-12;
 }
 #pictureChanger
 {
@@ -480,7 +476,7 @@ top:269px;
 position:relative;
 float:left;
 right:-150px;
-bottom:90;
+bottom:50;
 }
 
 #notifications
@@ -621,4 +617,9 @@ cursor:pointer;
 #theWall
 {
 padding-left:5%;
+}
+#abc
+{
+position:relative;
+top:-50%;
 }
