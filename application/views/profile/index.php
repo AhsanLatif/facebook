@@ -169,7 +169,26 @@ if(isset($friends))
 
     </div>
 
+<h3> <u>My Friends</u> </h3>
+<div class="hoverbox">
 
+		
+      
+                <?php
+                foreach ($friends as $friend) {
+			
+                    echo"<li> <a href=" . $base . "/index.php/profile/viewProfile?id=" . $friend['friend_id'] . ">" . "<img src='" . $base . "/" . $uploads . "/" . $friend['image_name'] . "' alt='nothing' width='110' height='90' /></a>";
+                    echo "<div class='GalleryCaption'>".$friend['friend_first_name'] . "</div></li>";
+             
+				}
+                ?>
+			
+			
+            
+		
+
+</div>
+ 
         
 
 

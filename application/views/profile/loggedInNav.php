@@ -50,6 +50,23 @@ if(isset($friends))
   </form>
 
 <div id="clearfix"></div>
-<div id="logOut"><a href=<?php echo "".$base."/index.php/profile/logout"?>><img src=<?php echo "".$base."/".$images."/logout_button.gif" ?> class="fTop" /></a></div>
+<div id="logOut">
+
+<div class="btn-group">
+  <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+    Options
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+	    <li ><a href=<?php echo "".$base."/index.php/profile/goToPage/newsfeed";?>>View Newsfeed </a></li>
+		<li> <a href=<?php echo "".$base."/index.php/profile/logout"; ?>> Logout </a> </li>
+	<li><a  href="#">   </a></li>
+	 <li><a  href="#">   </a></li>
+	  <li><a  href="#">   </a></li>
+	  	<li><a  href="#">   </a></li>
+	 <li><a  href="#">   </a></li>
+	  <li><a  href="#">   </a></li>
+  </ul>
+</div></div>
 
 </div>

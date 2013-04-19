@@ -10,6 +10,8 @@
         <link href=<?php echo "" . $base . "/media/datepicker.css" ?> rel="stylesheet" type="text/css" media="all"/>
 		<link href=<?php echo "" . $base . "/media/dropzone.css" ?> rel="stylesheet" type="text/css" media="all"/>
         <link href=<?php echo "" . $base . "/" . $css ?> rel="stylesheet" type="text/css" media="all"/>
+				<link href=<?php echo "" . $base . "/media/hoverbox.css"; ?> rel="stylesheet" type="text/css" media="all"/>
+
         <link rel="shortcut icon" type="image/x-icon" href=<?php echo "" . $base . "/" . $images . "/favicon.ico" . ""; ?>>
         <script type="text/javascript" src=<?php echo $base . "/" . $js . "jquery.js" ?>></script>
         <script type="text/javascript" src=<?php echo $base . "/" . $js . "jquery.imgareaselect.min.js" ?>></script>
