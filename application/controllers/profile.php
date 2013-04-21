@@ -8,7 +8,7 @@ class profile extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('session');
     }
-
+	
     public function filteredSearch() {
         $i = 0;
         if (isset($_POST['fname']) && $_POST['fname'] != "") {
@@ -53,47 +53,45 @@ class profile extends CI_Controller {
             $this->load->view('footer', $data);
         }
     }
+		public function SearchFriends(){
+		
+		
+			$query = $_POST['query'];
+					if ($query == "") {
+						echo "nada";
+					}
+					$id=$this->session->userdata('id');
+			
+				
+		$from="user_friends";
+			   
+		$resource = $this->main_model->searchF($query,$from,$id);
+			    
+      echo json_encode($resource);
+	}
+		public function SearchMutualFriends(){
+		
+			$query = $_POST['query'];
+			$otherOf=$_POST['frndID'];
+					if ($query == "") {
+						echo "nada";
+					}
+			$id=$this->session->userdata('id');	
+		$from="user_friends";
+			   
+		$resource = $this->main_model->searchMF($query,$from,$id,$otherOf);
+			    
+      echo json_encode($resource);
 
-    public function SearchFriends() {
-
-
-        $query = $_POST['query'];
-        if ($query == "") {
-            echo "nada";
-        }
-        $id = $this->session->userdata('id');
-
-
-        $from = "user_friends";
-
-        $resource = $this->main_model->searchF($query, $from, $id);
-
-        echo json_encode($resource);
-    }
-
-    public function SearchMutualFriends() {
-
-        $query = $_POST['query'];
-        $otherOf = $_POST['frndID'];
-        if ($query == "") {
-            echo "nada";
-        }
-        $id = $this->session->userdata('id');
-        $from = "user_friends";
-
-        $resource = $this->main_model->searchMF($query, $from, $id, $otherOf);
-
-        echo json_encode($resource);
-    }
-
+	}
     public function Search() {
         $query = $_POST['SearchBox'];
         if ($query == "") {
             $this->displayPeople();
             return;
         }
-
-
+		
+		
         $data = array('0' => 'firstname', '1' => 'lastname', '2' => 'school', '3' => 'university', '4' => 'employer', '5' => 'city');
         $i = 0;
         do {
@@ -107,32 +105,31 @@ class profile extends CI_Controller {
             }
             $i++;
         } while ($resource == "0" && $i <= 5);
-        $data = $this->main_model->load_media();
+    $data = $this->main_model->load_media();
         $data['details'] = $resource;
         $data['userid'] = $this->session->userdata('id');
         $data['id'] = $this->session->userdata('id');
-        $friends = $this->main_model->viewFriends($data['userid']);
-        $data['friends'] = $friends;
+				 $friends = $this->main_model->viewFriends($data['userid']);
+				  $data['friends'] = $friends;
         $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('profile/view_people', $data);
         $this->load->view('footer', $data);
     }
-
-    public function updateInfo() {
-        $school = $_POST['school'];
-        $university = $_POST['university'];
-        $employer = $_POST['employer'];
-        $bdate = date('Y-m-d H:i:s', strtotime($_POST['bdate']));
-        $id = $_POST['id'];
-        $data = array('user_id' => $id, 'school' => $school, 'university' => $university, 'employer' => $employer);
-        $this->main_model->insert_sign_up2($data);
-        $blekh = $this->main_model->updateInfo($data);
-        $this->main_model->updateBirthday(array('id' => $id, 'birthday' => $bdate));
-        $this->index();
-    }
-
-    public function cropPicture() {
+public function updateInfo()
+	{
+		$school=$_POST['school'];
+		$university=$_POST['university'];
+		$employer=$_POST['employer'];
+		$bdate=date('Y-m-d H:i:s', strtotime($_POST['bdate']));
+		$id=$_POST['id'];
+		$data=array('user_id'=>$id,'school'=>$school, 'university'=>$university, 'employer'=>$employer);
+		$this->main_model->insert_sign_up2($data);
+		$blekh=$this->main_model->updateInfo($data);
+		$this->main_model->updateBirthday(array('id'=>$id,'birthday'=>$bdate));
+		$this->index();
+	}
+	public function cropPicture() {
         $img = $this->session->userdata('img');
         echo $img;
 
@@ -157,6 +154,9 @@ class profile extends CI_Controller {
             echo $this->image_lib->display_errors();
         }
     }
+
+
+    
 
     public function removePic() {
         $username = $this->session->userdata('currMail');
@@ -237,7 +237,7 @@ class profile extends CI_Controller {
 
     public function viewProfile() {
         $id = $_GET['id'];
-        $data['myID'] = $id;
+$data['myID'] = $id;
         $data = $this->main_model->load_media();
         $data['title'] = 'Profile Page';
 
@@ -247,13 +247,13 @@ class profile extends CI_Controller {
         $data['school'] = $details['school'];
         $data['university'] = $details['university'];
         $data['employer'] = $details['employer'];
-
+    
         $userid = $this->session->userdata('id');
-        $friends = $this->main_model->viewFriends($userid);
+		 $friends = $this->main_model->viewFriends($userid);
         $data['friends'] = $friends;
-        $requests = $this->main_model->viewRequests($userid);
+        $requests = $this->main_model->viewRequests($userid); 
         $data['requests'] = $requests;
-
+        
         $check = $this->main_model->ifFriend($userid, $id);
         $data['myID'] = $id;
 
@@ -298,8 +298,8 @@ class profile extends CI_Controller {
         $data['details'] = $details;
         $data['userid'] = $this->session->userdata('id');
         $data['id'] = $this->session->userdata('id');
-        $friends = $this->main_model->viewFriends($data['userid']);
-        $data['friends'] = $friends;
+		 $friends = $this->main_model->viewFriends($data['userid']);
+		 $data['friends'] = $friends;
 //        foreach ($details as $detail){
 //            echo $detail['first_name'];
 //        } 
@@ -315,42 +315,55 @@ class profile extends CI_Controller {
         $data = $this->main_model->load_media();
         redirect('/profile/index', 'refresh');
     }
-
-    public function Notify($id, $notice, $link) {
-        $this->main_model->Notify($id, $notice, $link);
-    }
-
-    public function getNotification() {
-        $id = $_POST['id'];
-        $notice = $this->main_model->getNotification($id);
-        if ($notice != "") {
-            echo json_encode($notice);
-        } else {
-            echo json_encode("nada");
-        }
-    }
+		
+	public function Notify($id, $notice, $link)
+	{
+		$this->main_model->Notify($id,$notice,$link);
+	}
+	public function getNotification()
+	{
+	$id=$_POST['id'];
+	$notice=$this->main_model->getNotification($id);
+	if($notice!="")
+		{
+		echo json_encode($notice);
+		
+		}
+	else
+		{
+			echo json_encode("nada");
+		}
+	}
 
     public function addWallPost() {
         $to = $_POST['myID'];
         $from = $_POST['id'];
         $post = $_POST['post'];
         $this->main_model->addWallPost($to, $from, $post);
-        $details = $this->main_model->getUserDetailsById($from);
-        $notice = $details['first_name'] . " wrote on your wall";
-        $link = "#wall";
-        $id = $to;
-        $this->Notify($id, $notice, $link);
+		        $details=$this->main_model->getUserDetailsById($from);
+		$notice=$details['first_name']." wrote on your wall";
+		$link="#wall";
+		$id=$to;
+		$this->Notify($id,$notice,$link);
         echo json_encode($this->main_model->getUserDetailsById($from));
     }
 
     public function getWallPost($id) {
         return $this->main_model->getWallPost($id);
     }
-
-    public function removeNotification($id) {
-        $this->main_model->removeNotification($id);
-        $this->index();
-    }
+	public function removeNotification($id)
+	{
+		 $this->main_model->removeNotification($id);
+		 $this->index();
+	}
+		public function goToPage($page)
+	{
+		if($page=="newsfeed")
+		{
+			redirect('newsfeed/index');
+		}
+	}
+	
 
 }
 

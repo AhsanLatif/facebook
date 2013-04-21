@@ -15,6 +15,7 @@
     </div>
 
 <!-- body -->	
+<div class="fTop">
 			<div class="tabbable"> <!-- Only required for left/right tabs  -->
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab1" data-toggle="tab">Status/Link</a></li>
@@ -22,8 +23,8 @@
                     <li><a href="#tab3" data-toggle="tab">Video</a></li>
                 </ul>
 			</div>
-			
-  <div class="tab-content">
+			<div id="clearfix"></div>
+  <div class="tab-content" >
                     <div class="tab-pane active" id="tab1">
 						<input type="text" name="statusPost" id="statusPost" />
 						<input type="submit" class="btn" value="post" id="simplePost" />
@@ -51,6 +52,9 @@
    
 	<div id="newPostAdder" ></div>
    
+   </div>
+   </div>
+   <div id="clearfix">
    </div>
 		
 		
