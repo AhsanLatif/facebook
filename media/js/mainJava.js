@@ -204,7 +204,7 @@ $(document).ready(function() {
                     for(var i =0;i <obj.length-1;i++)
                     {
 
-                        html=html+"<li><a href="+base+"/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
+                        html=html+"<li><a href="+basePath+"/profile/removeNotification/"+obj[i].id+">"+obj[i].notice+"</a></li>";
  
                     }
                     $('#noList').html(html);
