@@ -59,13 +59,14 @@ class Newsfeed extends CI_Controller {
             unset($config);
             $date = date("ymd");
             $configVideo['upload_path'] = './video';
-            $configVideo['max_size'] = '10240';
+            $configVideo['max_size'] = '30240';
             $configVideo['allowed_types'] = 'avi|flv|wmv|mp3';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date . $_FILES['video']['name'];
             $configVideo['file_name'] = $video_name;
 
+            $text = $_POST['VidText'];
             $this->load->library('upload', $configVideo);
             $this->upload->initialize($configVideo);
             if (!$this->upload->do_upload('video')) {
@@ -74,6 +75,7 @@ class Newsfeed extends CI_Controller {
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
+            $this->addPost($text, $video_name, 4);
         }
 
     }

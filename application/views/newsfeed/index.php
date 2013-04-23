@@ -49,6 +49,8 @@
             <form class="cssform" name="property" id="property" method="POST" action="<?php echo base_url() ?>index.php/newsfeed/add_video"  enctype="multipart/form-data" >
                 <table>
                     <tr>
+                        
+                        <label>Caption </label><input type="text" id='VidText' placeholder="Add a caption before you select your video!" name="VidText" />
                         <td>Select Video :</td>
                         <td><input type="file" id="video" name="video" ></td>
                     </tr>
