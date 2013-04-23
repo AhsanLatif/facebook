@@ -11,19 +11,42 @@ class Newsfeed extends CI_Controller {
     }
 
     public function index() {
-        // Grab HTML From the URL
-        /*
-          $html = file_get_html('http://codeigniter.com/');
+       
+	
+	$data = $this->main_model->load_media();
+        $data['title'] = 'Newsfeed';
+        $username = $this->session->userdata('currMail');
+        if (!$username) {
+            redirect('/home/index', 'refresh');
+        }
+        $details = $this->main_model->getUserDetails($username);
+        $data['name'] = $details['first_name'] . " " . $details['last_name'];
+        $data['bday'] = $details['birthday'];
+        $data['school'] = $details['school'];
+        $data['university'] = $details['university'];
+        $data['employer'] = $details['employer'];
 
 
-          // find all link on Codeigniter Site
+        $id = $this->main_model->get_id($username);
+        $data['notification'] = $this->main_model->getNotification($id);
+        
+        $id = $this->main_model->get_id($username);
+        $imgage_path = $this->main_model->image_model($id);
 
-          foreach($html->find('img') as $e)
-          echo $e . '<br>'; */
+        $data['id'] = $id;
+        $data['image_path'] = $imgage_path;
+        $img = array('img' => $imgage_path);
+        $this->session->set_userdata($img);
+        $this->session->set_userdata(array('id' => $id));
+        $friends = $this->main_model->viewFriends($id);
+        $data['friends'] = $friends;
 
-        $data = $this->main_model->load_media();
-        $this->load->view('header', $data);
+        $requests = $this->main_model->viewRequests($id);
+        $data['requests'] = $requests;
+ $this->load->view('header', $data);
+        $this->load->view('profile/loggedInNav', $data);
         $this->load->view('newsFeed/index', $data);
+        $this->load->view('footer', $data);
     }
 
     public function uploadPhoto() {
@@ -59,14 +82,13 @@ class Newsfeed extends CI_Controller {
             unset($config);
             $date = date("ymd");
             $configVideo['upload_path'] = './video';
-            $configVideo['max_size'] = '30240';
-            $configVideo['allowed_types'] = 'avi|flv|wmv|mp3';
+            $configVideo['max_size'] = '10240';
+            $configVideo['allowed_types'] = 'avi|flv|wmv|mp4';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date . $_FILES['video']['name'];
             $configVideo['file_name'] = $video_name;
 
-            $text = $_POST['VidText'];
             $this->load->library('upload', $configVideo);
             $this->upload->initialize($configVideo);
             if (!$this->upload->do_upload('video')) {
@@ -75,7 +97,6 @@ class Newsfeed extends CI_Controller {
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
-            $this->addPost($text, $video_name, 4);
         }
 
     }
