@@ -97,6 +97,8 @@ class Newsfeed extends CI_Controller {
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
+            $text = $_POST['VidText'];
+            $this->addPost($text, $video_name, '4');
         }
 
     }
