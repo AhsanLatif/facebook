@@ -1,6 +1,6 @@
 //Jquery Calls
 $(document).ready(function() {
-    var basePath="http://localhost/webProject/index.php/";
+    var basePath="http://localhost/facebook/index.php/";
     var abc;
     $( ".link" ).on( "click", function(e) {
         e.preventDefault();
@@ -276,8 +276,8 @@ $(document).ready(function() {
 					
                         for(var i =0;i <obj.length-1;i++)
                         {
-                            Vhtml=Vhtml+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
-                            "<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
+                            Vhtml=Vhtml+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/facebook/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
+                            "<img src='http://localhost/facebook/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
 					
                      
                         }
@@ -320,8 +320,8 @@ $(document).ready(function() {
 					
                         for(var i =0;i <obj.length;i++)
                         {
-                            html=html+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/webProject/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
-                            "<img src='http://localhost/webProject/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
+                            html=html+"<div class='GalleryImage fTop'>"+"<a href='http://localhost/facebook/index.php/profile/viewProfile?id="+ obj[i].friend_id+"'>"+
+                            "<img src='http://localhost/facebook/uploads/"+obj[i].image_name+"' alt='myImage!' width='110' height='90' /></a><div class='GalleryCaption'>"+obj[i].friend_first_name+"</div></div>";
 					
                      
                         }
@@ -392,7 +392,7 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
               {
 			  if(obj[i].type=='1')
 				{
-				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
+				html=html+'<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/facebook/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>';  }    
             
           }
 			         
@@ -420,8 +420,9 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
   
                     if(obj[i].type=='1')
                     {
-                        html='<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/webProject/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>'; 
+                        html='<u>'+obj[i].first_name+' posted</u>: <br><br><div class="NewsFeedImg"><img class="clickedImg" src="'+'http://localhost/facebook/uploads/'+obj[i].link+'"  alt="myImage"  //></div>'+"<div style='text-align:center' class='GalleryCaption'>"+obj[i].content+'</div><hr><br><br>'; 
 					 
+                    $('#currId').val(obj[i].post_id);
 
                         $(html).insertAfter('#newPostAdder');	
                     }
@@ -429,11 +430,14 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
                     {
                          html = '<u>'+obj[i].first_name+'posted</u>: <br><br><object width="338" height="300"> <param name="src" value="./video/video.wmv"> <param name="autoplay" value="false"><param name="controller" value="true"><param name="bgcolor" value="#333333"><embed TYPE="application/x-mlayer2" src="http://localhost/facebook/video/'+obj[i].link+'" autostart="false" loop="false" width="338" height="300" controller="true" bgcolor="#333333"></embed></object><div style="text-align:center" class="GalleryCaption">'+obj[i].content+'</div><hr><br><br> ';					 
 
+                    $('#currId').val(obj[i].post_id);
                         $(html).insertAfter('#newPostAdder');	
                     }
                     else if(obj[i].type=='2')
                     {
                         html="<p>"+obj[i].content+"</p>";
+						
+                    $('#currId').val(obj[i].post_id);
                         /*	obj[i].type="";
 				var fName=obj[i].first_name;
 				var content=obj[i].content;
@@ -470,9 +474,8 @@ var path=basePath+"newsfeed/getPosts/"+idFrom;
                 }
 
 			
-                {
-                    $('#currId').val(obj[i].post_id);
-                }
+                
+                
             } , 
             complete: poll, 
             timeout: 10000000

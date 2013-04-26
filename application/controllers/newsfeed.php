@@ -11,9 +11,9 @@ class Newsfeed extends CI_Controller {
     }
 
     public function index() {
-       
-	
-	$data = $this->main_model->load_media();
+
+
+        $data = $this->main_model->load_media();
         $data['title'] = 'Newsfeed';
         $username = $this->session->userdata('currMail');
         if (!$username) {
@@ -29,7 +29,7 @@ class Newsfeed extends CI_Controller {
 
         $id = $this->main_model->get_id($username);
         $data['notification'] = $this->main_model->getNotification($id);
-        
+
         $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
 
@@ -43,7 +43,7 @@ class Newsfeed extends CI_Controller {
 
         $requests = $this->main_model->viewRequests($id);
         $data['requests'] = $requests;
- $this->load->view('header', $data);
+        $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('newsFeed/index', $data);
         $this->load->view('footer', $data);
@@ -94,13 +94,13 @@ class Newsfeed extends CI_Controller {
             if (!$this->upload->do_upload('video')) {
                 echo $this->upload->display_errors();
             } else {
+                $text = $_POST['VidText'];
+                $this->addPost($text, $video_name, '4');
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
-            $text = $_POST['VidText'];
-            $this->addPost($text, $video_name, '4');
         }
-
     }
+
 }
-        
+
