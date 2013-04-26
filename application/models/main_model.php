@@ -551,6 +551,11 @@ class Main_model extends CI_Model {
 		  $data = array('user_id' => $id, 'content' => $content, 'link' => $link, 'type' => $type);
         $this->db->insert('post', $data);
 	}
+	public function addPost_img($id, $content, $link, $type,$img)
+	{
+		  $data = array('user_id' => $id, 'content' => $content, 'link' => $link, 'type' => $type,'linkimage'=>$img);
+        $this->db->insert('post', $data);
+	}
 	public function getPosts($id,$iter)
 	{
 		$this->db->select('friend_id');
