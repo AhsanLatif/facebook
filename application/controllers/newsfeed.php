@@ -102,11 +102,12 @@ class Newsfeed extends CI_Controller {
                 echo $this->upload->display_errors();
 				echo 'error';
             } else {
+                $text = $_POST['VidText'];
+            $this->addPost($text, $video_name, '4');
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
-            $text = $_POST['VidText'];
-            $this->addPost($text, $video_name, '4');
+            
         }
 
     }
