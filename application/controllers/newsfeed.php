@@ -6,7 +6,7 @@ class Newsfeed extends CI_Controller {
         parent::__construct();
         $this->load->model('main_model');
         $this->load->helper('url');
-//        $this->load->helper('dom');
+       $this->load->helper('dom');
         $this->load->library('session');
     }
 
@@ -67,6 +67,13 @@ class Newsfeed extends CI_Controller {
 
     public function addPost($content, $link, $type) {
         $id = $this->session->userdata('id');
+		if($type=='2')
+		{
+			$img=$this->getImage($link);
+			$this->main_model->addPost_img($id,$content,$link,$type,$img);
+			
+		}
+		else
         $this->main_model->addPost($id, $content, $link, $type);
     }
 
@@ -81,8 +88,8 @@ class Newsfeed extends CI_Controller {
         if (isset($_FILES['video']['name']) && $_FILES['video']['name'] != '') {
             unset($config);
             $date = date("ymd");
-            $configVideo['upload_path'] = './video';
-            $configVideo['max_size'] = '10240';
+            $configVideo['upload_path'] = './video/';
+            $configVideo['max_size'] = '30240';
             $configVideo['allowed_types'] = 'avi|flv|wmv|mp4';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
@@ -93,6 +100,7 @@ class Newsfeed extends CI_Controller {
             $this->upload->initialize($configVideo);
             if (!$this->upload->do_upload('video')) {
                 echo $this->upload->display_errors();
+				echo 'error';
             } else {
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
@@ -102,5 +110,58 @@ class Newsfeed extends CI_Controller {
         }
 
     }
+	public function postEvaluate()
+	{
+		$text=$_POST['content'];
+		if(preg_match('/\\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_()|!:,.;]*[-A-Z0-9+&@#\/%=~_()|]/i', $text, $result)) 
+		{	
+			$url = $result[0];
+			$this->addPost($text,$url,'2');
+		} 
+	else 
+	{
+		$this->addPost($text,'null','3');
+	}
+	}
+	
+		public function getImage($link)
+	{
+	if($this->isImage($link))
+	{
+		return $link;
+	}
+		$html = file_get_html($link);
+		$pre="";
+		$theSrc="";
+		$percent='10';
+			foreach($html->find('img') as $e):
+			{
+			$percent='percent'+5;
+			if (substr($e->src, 0, 1) === '/') {
+
+					$pre=$link;
+					}
+		$theSrc=$e->src;
+		if($percent=='100')
+		{	$percent=95;}
+			  echo '<script language="javascript">
+    document.getElementById("linkProgress").style.width='.$progress.'</script>';
+				return $pre.$theSrc;
+		}endforeach;
+	
+	
+return $pre.$theSrc;
+}
+ public function isImage( $url )
+  {
+    $pos = strrpos( $url, ".");
+	if ($pos === false)
+	  return false;
+	$ext = strtolower(trim(substr( $url, $pos)));
+	$imgExts = array(".gif", ".jpg", ".jpeg", ".png", ".tiff", ".tif"); // this is far from complete but that's always going to be the case...
+	if ( in_array($ext, $imgExts) )
+	  return true;
+    return false;
+  }
 }
         

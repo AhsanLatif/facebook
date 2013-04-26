@@ -28,6 +28,9 @@
         <div class="tab-pane active" id="tab1">
             <input type="text" name="statusPost" id="statusPost" />
             <input type="submit" class="btn" value="post" id="simplePost" />
+			<div class="progress progress-info progress-striped" style="margin-bottom: 9px;">  
+        <div id="linkProgress" class="bar" style="width: 0%"></div>  
+      </div> 
         </div>
 
         <div class="tab-pane" id="tab2">
