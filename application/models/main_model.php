@@ -49,6 +49,18 @@ class Main_model extends CI_Model {
             return 'defaultPic.gif';
         }
     }
+	public function cover_get($user_id) {
+        $this->db->select('image_name');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('is_active', 2);
+        $query = $this->db->get('user_images');
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->image_name;
+        } else {
+            return 'defaultCover.jpg';
+        }
+    }
 
     public function insert_sign_up($data) {
         $this->db->insert('user_sign_up', $data);
@@ -149,11 +161,13 @@ class Main_model extends CI_Model {
         $this->db->insert('user_info', $data);
     }
 
-    public function insert_image_info($data) {
+  
+	 public function insert_image_info($data) {
 
-        $result = $this->db->get_where('user_images', array('user_id' => $data['user_id']));
+        $result = $this->db->get_where('user_images', array('user_id' => $data['user_id'], 'is_active'=>$data['is_active']));
         if ($result->num_rows > 0) {
             $this->db->where('user_id', $data['user_id']);
+			$this->db->where('is_active',$data['is_active']);
             $img = array('image_name' => $data['image_name']);
             $this->db->update('user_images', $img);
         } else {

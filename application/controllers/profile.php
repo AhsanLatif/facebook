@@ -191,6 +191,27 @@ public function updateInfo()
         $this->main_model->insert_image_info($data);
         $this->index();
     }
+	    public function coverPhotoUpload() {
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '10000';
+        $config['max_width'] = '10240';
+        $config['max_height'] = '7680';
+
+        $this->load->library('upload', $config);
+        $this->upload->do_upload();
+        $imgdata = $this->upload->data();
+        $filename = $imgdata['file_name'];
+        $user_id = $_POST['id'];
+        $data = array(
+            'user_id' => $user_id,
+            'image_name' => $imgdata['file_name'],
+            'is_active' => 2
+        );
+        $this->main_model->insert_image_info($data);
+        $this->index();
+    }
 
     public function index() {
 
@@ -215,7 +236,8 @@ public function updateInfo()
         $data['posted'] = 8;
         $id = $this->main_model->get_id($username);
         $imgage_path = $this->main_model->image_model($id);
-
+	$cover=$this->main_model->cover_get($id);
+	$data['cover']=$cover;
         $data['id'] = $id;
         $data['image_path'] = $imgage_path;
         $img = array('img' => $imgage_path);

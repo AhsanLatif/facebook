@@ -29,7 +29,8 @@ class Home extends CI_Controller {
         $data['title'] = 'Welcome To Facebook';
         $this->load->view('header', $data);
         if ($page == 'signup1' || $page == 'signup2' || $page == 'signup3') {
-		if(!$this->session->userdata('currMail'))
+		$mail=$this->session->userdata('currMail');
+		if($mail!=false)
           {  $data['id'] = $this->session->userdata('id');
             $data['stepCount'] = $page;
             $this->load->view('home/signupSteps', $data);}
@@ -147,7 +148,7 @@ class Home extends CI_Controller {
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email_id' => $email,
-            'password' => $pass,
+            'password' => md5($pass),
             'phone' => $phno,
             'birthday' => $date,
             'gender' => $gender,
@@ -223,7 +224,7 @@ class Home extends CI_Controller {
 
     public function login() {
         $username = $_POST['loginEmail'];
-        $password = $_POST['loginPassword'];
+        $password = md5($_POST['loginPassword']);
         $value = $this->main_model->login_model($username, $password);
         if ($value == 0) {
             $invalididpassword = 'invalid username or password';
