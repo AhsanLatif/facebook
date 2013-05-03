@@ -21,5 +21,7 @@
 	<a href=<?php echo"" .$base."/".$images."/footer/help.jpg" ."" ?>>			Help &nbsp 				</a>
 	
 </p>
-<br/>
+<br>
 </footer>
+
+			 </body>

@@ -123,6 +123,9 @@ public function updateInfo()
 		$employer=$_POST['employer'];
 		$bdate=date('Y-m-d H:i:s', strtotime($_POST['bdate']));
 		$id=$_POST['id'];
+		$school=strip_tags($school);
+		$university=strip_tags($university);
+		$employer=strip_tags($employer);
 		$data=array('user_id'=>$id,'school'=>$school, 'university'=>$university, 'employer'=>$employer);
 		$this->main_model->insert_sign_up2($data);
 		$blekh=$this->main_model->updateInfo($data);
@@ -198,11 +201,11 @@ public function updateInfo()
             redirect('/home/index', 'refresh');
         }
         $details = $this->main_model->getUserDetails($username);
-        $data['name'] = $details['first_name'] . " " . $details['last_name'];
-        $data['bday'] = $details['birthday'];
-        $data['school'] = $details['school'];
-        $data['university'] = $details['university'];
-        $data['employer'] = $details['employer'];
+        $data['name'] = strip_tags($details['first_name'] . " " . $details['last_name']);
+        $data['bday'] = strip_tags($details['birthday']);
+        $data['school'] = strip_tags($details['school']);
+        $data['university'] = strip_tags($details['university']);
+        $data['employer'] = strip_tags($details['employer']);
 
 
         $id = $this->main_model->get_id($username);

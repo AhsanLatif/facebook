@@ -29,9 +29,14 @@ class Home extends CI_Controller {
         $data['title'] = 'Welcome To Facebook';
         $this->load->view('header', $data);
         if ($page == 'signup1' || $page == 'signup2' || $page == 'signup3') {
-            $data['id'] = $this->session->userdata('id');
+		if(!$this->session->userdata('currMail'))
+          {  $data['id'] = $this->session->userdata('id');
             $data['stepCount'] = $page;
-            $this->load->view('home/signupSteps', $data);
+            $this->load->view('home/signupSteps', $data);}
+			else
+			{
+			redirect('/home/index');
+			}
         }
 
         $this->load->view('home/' . $page, $data);
@@ -76,9 +81,6 @@ class Home extends CI_Controller {
             $error = "error: Lastname exceeds limit";
         }
 
-        if (strlen($lastName) <= 2) {
-            $error = "error: Lastname is extreemly small";
-        }
 
         if ($email == "" || $email == NULL) {
             $error = "error: Email field empty";
@@ -92,7 +94,7 @@ class Home extends CI_Controller {
             $error = "error: Password field empty ";
         }
 
-        $valid_name = "/^[a-zA-Z]{2,30}$/";
+        $valid_name = "/^[a-z]+$/i";
 
         if (!preg_match($valid_name, $firstName)) {
             $error = "error: First name should only have alphabets";

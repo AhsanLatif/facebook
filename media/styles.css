@@ -590,6 +590,14 @@ border-width:1px;
 width:30%;
 height:10%;
 }
+#dropVFiles
+{
+border-style:solid;
+border-color:black;
+border-width:1px;
+width:30%;
+height:10%;
+}
 .aPost
 {
 position:relative;
@@ -599,25 +607,101 @@ float:top;
 {
 float:left;
 }
-.NewsFeedImg 
+.NewsFeedImg
 {
-width:110;
-height:90;
-border-style:solid;
-border-width:2px;
-border-color:gray;
+min-width: 300;
+width:250px;
+height: 200;
+padding-top: 16 !important;
+padding-right: 1043px;
+background-color:rgba(250, 239, 239, 0.75);
 }
 .NewsFeedImg img
 {
-width:110;
-height:90;
+position:relative;
 cursor:pointer;
+width:190 !important;
+height:190;
+float:right;
 
+}
+.NewsFeedImg p
+{
+position:relative;
+width:50px;
+color:gray;
+float:left;
+top:30px;
+float:right;
+}
+.post-container {
+    margin: 20px 20px 0 0;  
+	width:500px;
+	background-color:rgba(207, 181, 181, 0.56);
+    border: 2px solid #333;
+    overflow: auto
+}
+.post-thumb {
+    float: left
+}
+.post-thumb img {
+    display: block;
+	width:100px;
+	height:100px;
+	border-color:gray;
+	border-style:inset;
+	border-width:1px;
+}
+.post-content {
+    margin-left: 120px;
+	font-family: "Times New Roman", Times, serif;
+	color: rgb(11, 0, 134);
+	font-size: 18;
+	font-style: italic;
+
+}
+.post-content-normal 
+{
+font-family: "Times New Roman", Times, serif;
+color: rgb(11, 0, 134);
+font-size: 18;
+font-style: italic;
+}
+
+.post-title {
+    font-weight: bold;
+    font-size: 200%
 }
 #theWall
 {
 padding-left:5%;
 }
+#linkloading
+{
+display:none;
+}
+#linkloading img
+{
+width:100px;
+height:100px;
+}
+#nameHolder
+{
+position: relative;
+top: 13px;
+font-size: 31;
+right: 358;
+color: rgb(224, 193, 193);
+}
+#coverChanger
+{
+position: absolute;
+z-index: 9999;
+margin-top: -30px;
+display: none;
+
+}
+
 #abc
 {
 position:relative;

@@ -46,7 +46,7 @@ class Newsfeed extends CI_Controller {
  $this->load->view('header', $data);
         $this->load->view('profile/loggedInNav', $data);
         $this->load->view('newsFeed/index', $data);
-        $this->load->view('footer', $data);
+$this->load->view('footer', $data);
     }
 
     public function uploadPhoto() {
@@ -90,7 +90,7 @@ class Newsfeed extends CI_Controller {
             $date = date("ymd");
             $configVideo['upload_path'] = './video/';
             $configVideo['max_size'] = '30240';
-            $configVideo['allowed_types'] = 'avi|flv|wmv|mp4';
+            $configVideo['allowed_types'] = 'avi|flv|wmv|mp4|3gp';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date . $_FILES['video']['name'];
@@ -102,12 +102,11 @@ class Newsfeed extends CI_Controller {
                 echo $this->upload->display_errors();
 				echo 'error';
             } else {
-                $text = $_POST['VidText'];
-            $this->addPost($text, $video_name, '4');
                 $videoDetails = $this->upload->data();
                 echo "Successfully Uploaded";
             }
-            
+            $text = $_POST['VidText'];
+            $this->addPost($text, $video_name, '4');
         }
 
     }
@@ -130,6 +129,12 @@ class Newsfeed extends CI_Controller {
 	if($this->isImage($link))
 	{
 		return $link;
+	}
+	if($this->isYouTubeVid($link)==true)
+	{
+	parse_str( parse_url( $link, PHP_URL_QUERY ), $my_array_of_vars );
+		$id=$my_array_of_vars['v']; 
+return "http://img.youtube.com/vi/".$id."/default.jpg";		
 	}
 		$html = file_get_html($link);
 		$pre="";
@@ -164,5 +169,23 @@ return $pre.$theSrc;
 	  return true;
     return false;
   }
+  public function isYouTubeVid($url)
+  {
+   if (strpos($url, 'youtube') > 0) {
+        return true;
+    } 
+	else
+	{
+	return false;
+	}
+  }
+  
+  public function delete_post()	
+	{	
+		$id=$this->session->userdata('id');
+		$post_id=$_POST['postid'];
+		$this->main_model->delete_post_row($post_id, $id);	
+	}
+
 }
         

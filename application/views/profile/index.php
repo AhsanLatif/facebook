@@ -17,7 +17,40 @@ if(isset($friends))
 		?>
 <div id="coverPhoto" class="coverPhoto">
 
-    <img src=<?php echo "" . $base . "/" . $images . "/defaultCover.jpg" ?> />
+    <img id="cover" src=<?php echo "" . $base . "/" . $images . "/defaultCover.jpg" ?> />
+	<button id="coverChanger" class="btn" data-toggle="modal" data-target="#coverUpload"> Edit </button>
+</div>
+<div id="coverUpload" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Edit your cover photo</h3>
+  </div>
+  <div class="modal-body">
+     <div class="tabbable"> <!-- Only required for left/right tabs  -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Remove Cover</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Upload A Cover</a></li>
+              
+                </ul>
+				<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+				<a href=<?php echo $base."/index.php/profile/removeCover"; ?> > Click to replace cover with default</a>
+				</div>
+				<div class="tab-pane" id="tab2">
+				 <form enctype="multipart/form-data"  id="coverPicChooser" name="coverPicChooser" method="post" onsubmit="return validatePicUpload();" action=<?php echo "" . $base . "/index.php/profile/coverPhotoUpload" ?>>
+                            <input type="file" name="userfile" id="file"><br>
+                            <input type="hidden" name="id" value= <?php echo $id ?> />
+
+                            <input class="btn-success" type="submit"  value="save">
+							</form>
+				</div>
+				</div>
+	
+	</div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" data-dismiss="modal" class="btn">Close</a>
+  </div>
 </div>
 <div class="profileWrapper fTop mainBlueColor">
 

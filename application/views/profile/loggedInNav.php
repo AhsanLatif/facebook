@@ -32,14 +32,15 @@ if(isset($friends))
             ?>
         </ul>
 </div>
-<div class="dropdown" id="notifications">
+<!--<div class="dropdown" id="notifications">
   <button data-toggle="dropdown" > ! </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
 <span id="noList">
 </span>
    
   </ul>
-</div>
+</div>-->
+ <div id="nameHolder"><a href=<?php echo "".$base."/index.php/profile"?> > <?php echo $name ?> </a></div>
 <input type="hidden" name='currid' id='currid' value=<?php echo $id ?> />
 <input type="hidden" name="path" id="path"  value=<?php echo "".$base."/index.php/profile"; ?> />
   <div id="searchButton"><a onclick="searchProfileHead.submit();"><img src=<?php echo "" . $base . "/" . $images . "/search.png"; ?> /> </a></div>
@@ -49,6 +50,7 @@ if(isset($friends))
   <input type="text" name="SearchBox" id="search" data-items="4" class="search-query" placeholder="Search" data-provide="typeahead" data-source=<?php echo json_encode($frends); ?> autocomplete="off" />
   </form>
 
+ 
 <div id="clearfix"></div>
 
 

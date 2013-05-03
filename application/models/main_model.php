@@ -584,6 +584,10 @@ class Main_model extends CI_Model {
 
 		
 	}
+	public function delete_post_row($post_id, $id)	
+{	 	
+    $this->db->delete('post', array('user_id' => $id, 'post_id'=> $post_id)); 
+}
 }
 
 ?>

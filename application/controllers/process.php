@@ -75,10 +75,17 @@ echo '<script> alert("success") </script>';
 	}
 	public	function findAccount()
 	{
-		$email = $_POST['resetEmail'];
+		if(isset( $_POST['resetEmail']))
+		{
+		$email=$_POST['resetEmail'];
+		}
+		else
+		{
+		redirect('/home/index');
+		}
 		$result=$this->main_model->getUserDetails($email);
 		$pic=$this->main_model->image_model($result['id']);
-		echo $pic;
+	
 		if($result==0)
 		{
 		$this->goToPage('resetPassword','Email not found');
